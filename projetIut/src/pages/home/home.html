@@ -1,17 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Accueil</ion-title>
+    <ion-title>{{global.titleApp}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <h2>Welcome to CheckPoint !</h2>
+  <h3>(ou autre nom pour l'app)</h3>
+  <p>Ici vous pouvez à chaque instant sauvegarder votre position.</p>
+  <button id="save-button" ion-button full (click)="click('middle')">
+      <ion-icon id="save-icon" name="pin"></ion-icon>
+  </button>
+
 </ion-content>
