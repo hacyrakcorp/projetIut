@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Repères
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list> 
+    <button ion-item (click)="info()" *ngFor="let repere of reperes">
+      <h1>{{repere[0]}}</h1>
+      <p>latitude : {{repere[1]}}</p>
+      <p>longitude : {{repere[2]}}</p>
+    </button>
+  </ion-list>
+</ion-content>
