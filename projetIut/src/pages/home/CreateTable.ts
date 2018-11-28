@@ -33,7 +33,7 @@ export class CreateTable {
       location: 'default' // the location field is required
     })
     .then((db : SQLiteObject) => {
-      db.executeSql('create table FDR(id int AUTO_INCREMENT,nom varchar(32),Lattitude double,Longitude double,img BLOB,urlaudio varchar(64)', []) //execute le code sql pour creer une table FDR
+      db.executeSql('CREATE TABLE IF NOT EXISTS FDR(id int AUTO_INCREMENT,nom varchar(32),Lattitude double,Longitude double,img BLOB,urlaudio varchar(64)', []) //execute le code sql pour creer une table FDR
       .then(() => console.log('Executed SQL'))
       .catch(e => console.log(e));
     });
