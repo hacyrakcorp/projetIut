@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+import { RepereInfoPage } from '../repere-info/repere-info';
 
 @Component({
   selector: 'page-reperes',
@@ -11,12 +13,13 @@ export class ReperesPage {
     ["Repere2",43.6723861,4.639733200000023],
     ["Repere3",43.6723861,4.639733200000023]
   ];
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public modalCtrl : ModalController) {
    
   }
 
   info() {
-   
+	  let modal = this.modalCtrl.create(RepereInfoPage);
+	  modal.present();
   }
 
 }

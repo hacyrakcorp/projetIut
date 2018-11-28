@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { ReperesPage } from '../pages/reperes/reperes';
+import { RepereInfoPage } from '../pages/repere-info/repere-info';
 import { ParametrePage } from '../pages/parametre/parametre';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     AboutPage,
     ReperesPage,
+	RepereInfoPage,
     ParametrePage,
     HomePage,
     TabsPage,
@@ -42,6 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     AboutPage,
     ReperesPage,
+	RepereInfoPage,
     ParametrePage,
     HomePage,
     TabsPage,

@@ -46,7 +46,19 @@ export class CreateTable {
     })
     .then((db : SQLiteObject) => {
       db.executeSql('UPDATE '+$table+' SET ? WHERE id = '+ $array['id'], $array) //execute le code sql pour mettre à jour une table
-      .then(() => console.log('Executed SQL, Update FDR'))
+      .then(() => console.log('Executed SQL, Update'))
+      .catch(e => console.log(e));
+    });
+  }
+
+  public delete($table,$id){
+    this.sqlite.create({ //Ouvre ou créer la bdd
+      name: 'data.db',
+      location: 'default' // the location field is required
+    })
+    .then((db : SQLiteObject) => {
+      db.executeSql('DELETE '+$table+' WHERE id = '+$id) //execute le code sql pour supprimer une données
+      .then(() => console.log('Executed SQL, Delete'))
       .catch(e => console.log(e));
     });
   }
