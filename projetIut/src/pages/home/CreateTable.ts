@@ -45,7 +45,7 @@ export class CreateTable {
       location: 'default' // the location field is required
     })
     .then((db : SQLiteObject) => {
-      db.executeSql('UPDATE FDR SET ? WHERE id = '+ $array['id'], $array) //execute le code sql pour mettre à jour une table FDR
+      db.executeSql('UPDATE '+$table+' SET ? WHERE id = '+ $array['id'], $array) //execute le code sql pour mettre à jour une table
       .then(() => console.log('Executed SQL, Update FDR'))
       .catch(e => console.log(e));
     });
