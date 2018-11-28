@@ -4,13 +4,14 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { e } from '@angular/core/src/render3';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 
-export class HomePage {
+export class CreateTable {
 
   constructor(
     public platform: Platform,
@@ -34,6 +35,18 @@ export class HomePage {
     .then((db : SQLiteObject) => {
       db.executeSql('create table FDR(id int AUTO_INCREMENT,nom varchar(32),Lattitude double,Longitude double,img BLOB,urlaudio varchar(64)', []) //execute le code sql pour creer une table FDR
       .then(() => console.log('Executed SQL'))
+      .catch(e => console.log(e));
+    });
+  }
+
+  public update($table,$array){
+    this.sqlite.create({ //Ouvre ou créer la bdd
+      name: 'data.db',
+      location: 'default' // the location field is required
+    })
+    .then((db : SQLiteObject) => {
+      db.executeSql('UPDATE FDR SET ? WHERE id = '+ $array['id'], $array) //execute le code sql pour mettre à jour une table FDR
+      .then(() => console.log('Executed SQL, Update FDR'))
       .catch(e => console.log(e));
     });
   }

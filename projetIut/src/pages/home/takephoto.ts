@@ -3,18 +3,18 @@ import { Camera } from '@ionic-native/camera';
 import { CameraPreview, CameraPreviewOptions} from '@ionic-native/camera-preview';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
   providers: [Camera,CameraPreview],
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class Photo {
 
   public base64Image: string;
 
-  constructor(private camera:Camera, private cameraPreview: CameraPreview, private base64ToGallery: Base64ToGallery, private androidPermisions: AndroidPermissions) {
+  constructor(public toastCtrl: ToastController,private camera:Camera, private cameraPreview: CameraPreview, private base64ToGallery: Base64ToGallery, private androidPermisions: AndroidPermissions) {
     
   }
 
@@ -76,6 +76,8 @@ photoshoot(){ //take a picture with rear camera and try to put this one inside g
     Base64ToGallery['base64ToGallery'](this.base64Image, 'img_').then(
       res => console.log("Saved image to gallery ", res),
       err => console.log("Error saving image to gallery ", err)
+      
     );
+    
     /*this.cameraPreview.stopCamera();*/
 }}
