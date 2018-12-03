@@ -63,4 +63,15 @@ export class CreateTable {
     });
   }
 
+  public addcom($table,$id,$com){
+    this.sqlite.create({ //Ouvre ou créer la bdd
+      name: 'data.db',
+      location: 'default' // the location field is required
+    })
+    .then((db : SQLiteObject) => {
+      db.executeSql('UPDATE '+$table+' SET commentaire = '$com' WHERE id = '+$id) //execute le code sql pour ajouter un comentaire
+      .then(() => console.log('Executed SQL, Delete'))
+      .catch(e => console.log(e));
+    });
+  }
 }
