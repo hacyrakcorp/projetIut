@@ -69,7 +69,7 @@ export class CreateTable {
       location: 'default' // the location field is required
     })
     .then((db : SQLiteObject) => {
-      db.executeSql('UPDATE '+$table+' SET commentaire = '$com' WHERE id = '+$id) //execute le code sql pour supprimer une données
+      db.executeSql('UPDATE '+$table+' SET commentaire = '$com' WHERE id = '+$id) //execute le code sql pour ajouter un comentaire
       .then(() => console.log('Executed SQL, Delete'))
       .catch(e => console.log(e));
     });
