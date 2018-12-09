@@ -13,6 +13,23 @@
 
 
 <ion-content padding>
-  TEst
+  <ion-item>
+    <ion-label color="primary" fixed>Nom</ion-label>
+    <ion-input type="nom" [(ngModel)]="nom" placeholder="Nom du repère"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" fixed>Latitude</ion-label>
+    <ion-input type="latitude" [(ngModel)]="latitude" placeholder="Latitude"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" fixed>Longitude</ion-label>
+    <ion-input type="longitude" [(ngModel)]="longitude" placeholder="Longitude"></ion-input>
+  </ion-item>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button full (click)="enregistrer()">Enregistrer</button>
+  </ion-toolbar>
+</ion-footer>
