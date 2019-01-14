@@ -21,8 +21,7 @@
   <ion-list>
       <ion-item *ngFor="let audio of this.audioCtrl.audioList; index as i;">
         <p>{{audio.filename}}</p>
-       
-         <button ion-button clear item-end large (click)="this.audioCtrl.playAudio(audio.filename, i)">
+         <button ion-button clear item-end large (click)="play(audio.filename, i)">
           <ion-icon name="play"></ion-icon>
         </button>
       

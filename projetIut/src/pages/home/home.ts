@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//import { NavController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { GlobalServiceProvider } from '../../providers/global-service/global-service';
 import { ToastController } from 'ionic-angular';
@@ -20,7 +20,7 @@ import { File } from '@ionic-native/file';
 export class HomePage {
   
   constructor(
-    //public navCtrl: NavController,
+    public navCtrl: NavController,
     public toastCtrl: ToastController,
     public global : GlobalServiceProvider,
     public photoCtrl : Photo,
@@ -33,7 +33,7 @@ export class HomePage {
   click($position: string) : void{
     this.audioCtrl.startRecord();
     //Attendre 5 secondes et stop record
-    let TIME_IN_MS = 10000;
+    let TIME_IN_MS = 5000;
     let hideFooterTimeout = setTimeout( () => {
         this.audioCtrl.stopRecord();
         const toast = this.toastCtrl.create({
@@ -59,5 +59,7 @@ export class HomePage {
     // this.photoCtrl.photoshoot();
   }
 
-
+  play(file,idx){
+    this.audioCtrl.playAudio(file,idx);
+  }
 }

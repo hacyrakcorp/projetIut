@@ -88,6 +88,7 @@
     <plugin name="cordova-plugin-android-permissions" spec="1.0.0" />
     <plugin name="cordova-sqlite-storage" spec="2.5.2" />
     <plugin name="cordova-plugin-media-capture" spec="3.0.2" />
+    <plugin name="cordova-plugin-media" spec="5.0.2" />
     <engine name="android" spec="7.0.0" />
     <engine name="browser" spec="5.0.4" />
 </widget>
