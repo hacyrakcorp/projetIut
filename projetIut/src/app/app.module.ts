@@ -9,13 +9,19 @@ import { RepereInfoPage } from '../pages/repere-info/repere-info';
 import { ParametrePage } from '../pages/parametre/parametre';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+
 import { Photo } from '../pages/home/takephoto';
 import { Camera } from '@ionic-native/camera';
 import { CameraPreview, CameraPreviewOptions} from '@ionic-native/camera-preview';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 
+import { Audio } from '../pages/home/priseaudio';
+import { Media, MediaObject } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
 
+import { CreateTable } from '../pages/home/CreateTable';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalServiceProvider } from '../providers/global-service/global-service';
@@ -31,13 +37,15 @@ import { HttpClientModule } from '@angular/common/http';
     ParametrePage,
     HomePage,
     TabsPage,
+    Audio,
     Photo
+ 
   ],
   imports: [
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,7 +56,8 @@ import { HttpClientModule } from '@angular/common/http';
     ParametrePage,
     HomePage,
     TabsPage,
-    Photo
+    Photo,
+    Audio
   ],
   providers: [
     StatusBar,
@@ -56,7 +65,9 @@ import { HttpClientModule } from '@angular/common/http';
     GlobalServiceProvider,
     HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo
+    CreateTable,SQLite,
+    Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
+    Audio,Media,File
   ]
 })
 export class AppModule {}

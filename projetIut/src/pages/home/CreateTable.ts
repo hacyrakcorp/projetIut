@@ -12,6 +12,7 @@ import { BoundDirectivePropertyAst } from '@angular/compiler';
 })
 
 export class CreateTable {
+  emplacement : string = "C:/Projets/projetIut/projetIut";
 
   constructor(
     public platform: Platform,
@@ -30,11 +31,31 @@ export class CreateTable {
   private createDatabase(){
     this.sqlite.create({
       name: 'data.db',
-      location: 'default' // the location field is required
+      location: this.emplacement // the location field is required
     })
     .then((db : SQLiteObject) => {
-      db.executeSql('CREATE TABLE IF NOT EXISTS FDR(id int AUTO_INCREMENT,nom varchar(32),Lattitude double,Longitude double,img BLOB,urlaudio varchar(64)', []) //execute le code sql pour creer une table FDR
+      db.executeSql('CREATE TABLE IF NOT EXISTS FDR'+
+      '(id int AUTO_INCREMENT,'+
+      'nom varchar(32),'+
+      'Lattitude double,'+
+      'Longitude double,'+
+      'img BLOB,'+
+      'urlaudio varchar(64)', []) //execute le code sql pour creer une table FDR
       .then(() => console.log('Executed SQL'))
+      .catch(e => console.log(e));
+    });
+  }
+
+  public insert($table,$array){
+    alert('enter \n'+this.emplacement);
+    this.sqlite.create({ //Ouvre ou créer la bdd
+      name: 'data.db',
+      location: this.emplacement
+    })
+    .then((db : SQLiteObject) => {
+      alert('insert');
+      db.executeSql('INSERT INTO '+$table+' VALUES(?)', $array) //execute le code sql pour mettre à jour une table
+      .then(() => console.log('Executed SQL, Insert'))
       .catch(e => console.log(e));
     });
   }
@@ -42,7 +63,7 @@ export class CreateTable {
   public update($table,$array){
     this.sqlite.create({ //Ouvre ou créer la bdd
       name: 'data.db',
-      location: 'default' // the location field is required
+      location: this.emplacement
     })
     .then((db : SQLiteObject) => {
       db.executeSql('UPDATE '+$table+' SET ? WHERE id = '+ $array['id'], $array) //execute le code sql pour mettre à jour une table
@@ -54,7 +75,7 @@ export class CreateTable {
   public delete($table,$id){
     this.sqlite.create({ //Ouvre ou créer la bdd
       name: 'data.db',
-      location: 'default' // the location field is required
+      location: this.emplacement // the location field is required
     })
     .then((db : SQLiteObject) => {
       db.executeSql('DELETE '+$table+' WHERE id = '+$id) //execute le code sql pour supprimer une données
@@ -66,11 +87,11 @@ export class CreateTable {
   public addcom($table,$id,$com){
     this.sqlite.create({ //Ouvre ou créer la bdd
       name: 'data.db',
-      location: 'default' // the location field is required
+      location: this.emplacement // the location field is required
     })
     .then((db : SQLiteObject) => {
-      db.executeSql('UPDATE '+$table+' SET commentaire = '$com' WHERE id = '+$id) //execute le code sql pour ajouter un comentaire
-      .then(() => console.log('Executed SQL, Delete'))
+      db.executeSql('UPDATE '+$table+' SET commentaire = '+$com+' WHERE id = '+$id) //execute le code sql pour ajouter un comentaire
+      .then(() => console.log('Executed SQL, addcom'))
       .catch(e => console.log(e));
     });
   }

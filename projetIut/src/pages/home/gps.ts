@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+//import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation'
 
 @Component({
@@ -9,7 +9,9 @@ import { Geolocation } from '@ionic-native/geolocation'
 export class HomePage {
   lat: any;
   lng: any;
-  constructor(public navCtrl: NavController, public geo: Geolocation) {
+  constructor(
+    //public navCtrl: NavController, 
+    public geo: Geolocation) {
 
   }
 
