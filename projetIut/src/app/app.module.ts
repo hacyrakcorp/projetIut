@@ -21,12 +21,14 @@ import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 
 import { CreateTable } from '../pages/home/CreateTable';
+import { SQLitePage } from '../pages/home/SQLitePage';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalServiceProvider } from '../providers/global-service/global-service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { FdrServiceProvider } from '../providers/fdr-service/fdr-service';
 
 @NgModule({
   declarations: [
@@ -65,9 +67,10 @@ import { HttpClientModule } from '@angular/common/http';
     GlobalServiceProvider,
     HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CreateTable,SQLite,
+    CreateTable,SQLite,SQLitePage,
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
-    Audio,Media,File
+    Audio,Media,File,
+    FdrServiceProvider
   ]
 })
 export class AppModule {}

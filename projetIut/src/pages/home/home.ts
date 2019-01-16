@@ -5,13 +5,12 @@ import { GlobalServiceProvider } from '../../providers/global-service/global-ser
 import { ToastController } from 'ionic-angular';
 
 import { CreateTable } from './CreateTable';
+import { SQLitePage } from './SQLitePage';
+
 import { Photo } from './takephoto';
 
 
 import { Audio } from './priseaudio';
-import { Platform } from 'ionic-angular';
-import { Media, MediaObject } from '@ionic-native/media';
-import { File } from '@ionic-native/file';
 
 @Component({
   selector: 'page-home',
@@ -25,35 +24,29 @@ export class HomePage {
     public global : GlobalServiceProvider,
     public photoCtrl : Photo,
     public audioCtrl : Audio,
-    public bddCtrl : CreateTable
+    public bddCtrl : CreateTable,
+    public sqliteCtrl : SQLitePage
     ) { 
+     
       
   }
 
   click($position: string) : void{
-    this.audioCtrl.startRecord();
+    let filePath = this.audioCtrl.startRecord();
     //Attendre 5 secondes et stop record
     let TIME_IN_MS = 5000;
     let hideFooterTimeout = setTimeout( () => {
         this.audioCtrl.stopRecord();
         const toast = this.toastCtrl.create({
-          message: "fin",
+          message: "fin record",
           duration: 3000,
           position : $position
         });
         toast.present();
-
+       // this.bddCtrl.createDatabase();
        //Enregistrement dans la base de données
-       //let array = ['repere test','','','',filePath];
-       //this.bddCtrl.insert('FDR',array);
-      // let audio = this.audioCtrl.getAudio();
-      /* const toast = this.toastCtrl.create({
-        message: 'Repère créé avec succès',
-        duration: 3000,
-        position : $position
-      });
-      toast.present();*/
-     
+      // let array = ['repere test','','','',filePath];
+      // this.bddCtrl.insert('FDR',array);
      }, TIME_IN_MS);
     
     // this.photoCtrl.photoshoot();

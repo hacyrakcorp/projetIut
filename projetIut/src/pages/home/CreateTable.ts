@@ -6,14 +6,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BoundDirectivePropertyAst } from '@angular/compiler';
 
+const DATA_BASE_FILE_NAME: string = "checkPoint.db";
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 
 export class CreateTable {
-  emplacement : string = "C:/Projets/projetIut/projetIut";
-
+  emplacement:string;
   constructor(
     public platform: Platform,
     public statusBar: StatusBar,
@@ -34,6 +35,7 @@ export class CreateTable {
       location: this.emplacement // the location field is required
     })
     .then((db : SQLiteObject) => {
+      console.log('Test');
       db.executeSql('CREATE TABLE IF NOT EXISTS FDR'+
       '(id int AUTO_INCREMENT,'+
       'nom varchar(32),'+
@@ -43,14 +45,14 @@ export class CreateTable {
       'urlaudio varchar(64)', []) //execute le code sql pour creer une table FDR
       .then(() => console.log('Executed SQL'))
       .catch(e => console.log(e));
-    });
+    }).catch(r => console.log(r));
   }
 
   public insert($table,$array){
     alert('enter \n'+this.emplacement);
-    this.sqlite.create({ //Ouvre ou créer la bdd
+    this.sqlite.create({
       name: 'data.db',
-      location: this.emplacement
+      location: this.emplacement // the location field is required
     })
     .then((db : SQLiteObject) => {
       alert('insert');
