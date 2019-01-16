@@ -86,9 +86,9 @@ export class Audio {
         + this.fileName;
         this.audio = this.media.create(this.filePath);
       }
-      alert(this.filePath);
       this.audio.startRecord();
       this.recording = true;
+      return this.filePath;
     }
 
 
@@ -116,7 +116,6 @@ export class Audio {
         this.audio = this.media.create(this.filePath);
       }
       this.audio.play();
-      alert('play');
       this.audio.setVolume(0.8);
     }
 }
