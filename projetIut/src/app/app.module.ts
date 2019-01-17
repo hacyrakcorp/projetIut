@@ -70,6 +70,7 @@ import { HttpClientModule } from '@angular/common/http';
     GlobalServiceProvider,
     HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ParametrePage,
     CreateTable,SQLite,SQLitePage,
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
     Audio,Media,File,

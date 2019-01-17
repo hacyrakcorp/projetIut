@@ -10,6 +10,7 @@ import { SQLitePage } from './SQLitePage';
 import { Photo } from './takephoto';
 import { Audio } from './priseaudio';
 import { GPS } from './GPS';
+import { ParametrePage } from '../parametre/parametre';
 
 
 @Component({
@@ -27,8 +28,8 @@ export class HomePage {
     //private bddCtrl : CreateTable,
     private sqliteCtrl : SQLitePage,
     private GPSCtrl : GPS,
+    private paramCtrl : ParametrePage
     ) { 
-     
       
   }
 
@@ -48,23 +49,33 @@ export class HomePage {
     )
 
 
-    let filePath = this.audioCtrl.startRecord();
-    //Attendre 5 secondes et stop record
-    let TIME_IN_MS = 5000;
-    setTimeout( () => {
-        this.audioCtrl.stopRecord();
-        const toast = this.toastCtrl.create({
-          message: "fin record",
-          duration: 3000,
-          position : $position
-        });
-        toast.present().then(()=>{
-          //Enregistrement dans la base de données
-          let array = ['repere test',latitude,longitude,filePath];
-          this.sqliteCtrl.insert('REPERES',array);
-        });    
-     }, TIME_IN_MS);
-    
+    alert(this.paramCtrl.getOpt_audio());
+
+
+    if (this.paramCtrl.getOpt_audio() == true){
+      let filePath = this.audioCtrl.startRecord();
+      //Attendre 5 secondes et stop record
+      let TIME_IN_MS = 5000;
+      setTimeout( () => {
+          this.audioCtrl.stopRecord();
+          const toast = this.toastCtrl.create({
+            message: "fin record",
+            duration: 3000,
+            position : $position
+          });
+          toast.present().then(()=>{
+            //Enregistrement dans la base de données
+            let array = ['repere audio true',latitude,longitude,filePath];
+            this.sqliteCtrl.insert('REPERES',array);
+          });    
+      }, TIME_IN_MS);
+    } else {
+      let TIME_IN_MS = 5000;
+      setTimeout( () => {
+        let array = ['repere audio false',latitude,longitude,''];
+        this.sqliteCtrl.insert('REPERES',array);
+      }, TIME_IN_MS);
+    }
     // this.photoCtrl.photoshoot();
   }
   select():void {  
@@ -79,7 +90,7 @@ export class HomePage {
     })
   }
 
-  play(file,idx){
+ /* play(file,idx){
     this.audioCtrl.playAudio(file,idx);
-  }
+  }*/
 }

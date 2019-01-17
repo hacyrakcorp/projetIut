@@ -57,7 +57,8 @@ export class SQLitePage {
                 "latitude DOUBLE, "+
                 "longitude DOUBLE, "+
                 "image BLOB, "+
-                "audio VARCHAR(250)"+
+                "audio VARCHAR(250), "+
+                "commentaire VARCHAR(250)" +
                 ")",[]
             ).then(() => {
                 console.log('Table Repères created !');

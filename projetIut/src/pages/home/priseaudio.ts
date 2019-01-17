@@ -105,17 +105,16 @@ export class Audio {
     
     playAudio(file,idx) {
       if (this.platform.is('ios')) {
-      this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + file;
-      this.audio = this.media.create(this.filePath);
+        this.audio = this.media.create(file);
       }
       else if (this.platform.is('android')) {
-        this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + file;
-        this.audio = this.media.create(this.filePath);
+        this.audio = this.media.create(file);
       } else if (this.platform.is('cordova')) {
         this.filePath = 'C:/Projets/projetIut/projetIut/' + file;
-        this.audio = this.media.create(this.filePath);
+        this.audio = this.media.create(file);
       }
       this.audio.play();
       this.audio.setVolume(0.8);
     }
+    
 }

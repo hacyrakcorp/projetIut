@@ -25,6 +25,15 @@
     <ion-label color="primary" fixed>Longitude</ion-label>
     <ion-input type="longitude" [(ngModel)]="longitude" placeholder="Longitude"></ion-input>
   </ion-item>
+  <ion-item> 
+    <ion-label color="primary" fixed>Audio</ion-label>
+    <button ion-button item-content (click)="play(audio)">
+        <ion-icon name="play"></ion-icon>
+    </button>
+    <p item-end>{{audioName}}</p>
+  </ion-item>
+  
+
 
 </ion-content>
 

@@ -10,6 +10,10 @@
   <ion-list>
     <ion-list-header>Follow us on Twitter</ion-list-header>
     <ion-item>
+      <ion-label>Audio</ion-label>
+      <ion-toggle [(ngModel)]="opt_audio" (ionChange)="notify()"></ion-toggle>
+    </ion-item>
+    <ion-item>
       <ion-icon name="ionic" item-start></ion-icon>
       @ionicframework
     </ion-item>
