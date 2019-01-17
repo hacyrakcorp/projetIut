@@ -19,6 +19,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Audio } from '../pages/home/priseaudio';
 import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
+import { GPS } from '../pages/home/GPS';
+import { Geolocation } from '@ionic-native/geolocation'
 
 import { CreateTable } from '../pages/home/CreateTable';
 import { SQLitePage } from '../pages/home/SQLitePage';
@@ -28,7 +30,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalServiceProvider } from '../providers/global-service/global-service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { FdrServiceProvider } from '../providers/fdr-service/fdr-service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FdrServiceProvider } from '../providers/fdr-service/fdr-service';
     HomePage,
     TabsPage,
     Audio,
-    Photo
+    Photo,
+    GPS
  
   ],
   imports: [
@@ -59,7 +61,8 @@ import { FdrServiceProvider } from '../providers/fdr-service/fdr-service';
     HomePage,
     TabsPage,
     Photo,
-    Audio
+    Audio,
+    GPS
   ],
   providers: [
     StatusBar,
@@ -70,7 +73,7 @@ import { FdrServiceProvider } from '../providers/fdr-service/fdr-service';
     CreateTable,SQLite,SQLitePage,
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
     Audio,Media,File,
-    FdrServiceProvider
+    GPS,Geolocation
   ]
 })
 export class AppModule {}
