@@ -4,13 +4,13 @@ import { NavController } from 'ionic-angular';
 import { GlobalServiceProvider } from '../../providers/global-service/global-service';
 import { ToastController } from 'ionic-angular';
 
-import { CreateTable } from './CreateTable';
+//import { CreateTable } from './CreateTable';
 import { SQLitePage } from './SQLitePage';
 
 import { Photo } from './takephoto';
-
-
 import { Audio } from './priseaudio';
+import { GPS } from './GPS';
+
 
 @Component({
   selector: 'page-home',
@@ -20,22 +20,38 @@ export class HomePage {
   
   constructor(
     public navCtrl: NavController,
-    public toastCtrl: ToastController,
-    public global : GlobalServiceProvider,
-    public photoCtrl : Photo,
-    public audioCtrl : Audio,
-    public bddCtrl : CreateTable,
-    public sqliteCtrl : SQLitePage
+    private toastCtrl: ToastController,
+    private global : GlobalServiceProvider,
+    private photoCtrl : Photo,
+    private audioCtrl : Audio,
+    //private bddCtrl : CreateTable,
+    private sqliteCtrl : SQLitePage,
+    private GPSCtrl : GPS,
     ) { 
      
       
   }
 
   click($position: string) : void{
+    var latitude;
+    var longitude;
+    //GPS
+    this.GPSCtrl.getLatitude().then((results) =>
+    {
+      latitude = JSON.stringify(results);
+    }
+    )
+    this.GPSCtrl.getLongitude().then((results) =>
+    {
+      longitude = JSON.stringify(results);
+    }
+    )
+
+
     let filePath = this.audioCtrl.startRecord();
     //Attendre 5 secondes et stop record
     let TIME_IN_MS = 5000;
-    let hideFooterTimeout = setTimeout( () => {
+    setTimeout( () => {
         this.audioCtrl.stopRecord();
         const toast = this.toastCtrl.create({
           message: "fin record",
@@ -44,7 +60,7 @@ export class HomePage {
         });
         toast.present().then(()=>{
           //Enregistrement dans la base de données
-          let array = ['repere test',filePath];
+          let array = ['repere test',latitude,longitude,filePath];
           this.sqliteCtrl.insert('REPERES',array);
         });    
      }, TIME_IN_MS);

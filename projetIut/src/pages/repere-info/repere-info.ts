@@ -22,6 +22,7 @@ export class RepereInfoPage {
   nom: string;
   latitude: string;
   longitude: string;
+  audio:string;
   repere;
 
   constructor(public viewCtrl: ViewController, 
@@ -48,6 +49,8 @@ export class RepereInfoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RepereInfoPage');
   }
+
+  
 
   fermeture() {
 	  this.viewCtrl.dismiss();

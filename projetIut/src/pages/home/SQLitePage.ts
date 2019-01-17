@@ -74,8 +74,8 @@ export class SQLitePage {
         ).then(() => {
             this.db.executeSql(
                 'INSERT INTO '+
-                $table+' (name,audio) '+
-                'VALUES (?,?)', $array
+                $table+' (name,latitude,longitude,audio) '+
+                'VALUES (?,?,?,?)', $array
             ).then(() => {
                 console.log('Insert réussi');
                 //alert('insert ok');
@@ -90,7 +90,7 @@ export class SQLitePage {
         //this.sqlite.create(
         //    this.options
         //).then(() => {
-            return new Promise((resolve, reject ) =>
+            return new Promise((resolve) =>
             {
                 this.db.executeSql(
                     'SELECT * '+
@@ -102,6 +102,10 @@ export class SQLitePage {
                     for (let i = 0; i < results.rows.length; i++) {
                             dataSelectAll.push({ 
                                 id : results.rows.item(i).idREPERES,
+                                name : results.rows.item(i).name,
+                                latitude : results.rows.item(i).latitude,
+                                longitude : results.rows.item(i).longitude,
+                                image : results.rows.item(i).image,
                                 audio : results.rows.item(i).audio
                             });
                            // alert(results.rows.item(i).audio);

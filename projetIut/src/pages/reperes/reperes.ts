@@ -6,23 +6,33 @@ import { ToastController } from 'ionic-angular';
 
  //Test param car console.log ne fonctionne pas
  import { AlertController } from 'ionic-angular';
+ import { SQLitePage } from '../home/SQLitePage';
 
 @Component({
   selector: 'page-reperes',
   templateUrl: 'reperes.html'
 })
 export class ReperesPage {
-  reperes = [
+ /* reperes = [
     {id:1,nom:"Repere1",latitude:48.862725,longitude:2.287592},
     {id:2,nom:"Repere2",latitude:43.6723861,longitude:4.639733200000023},
     {id:3,nom:"Repere3",latitude:46.6723861,longitude:4.56}
-  ];
-
+  ];*/
+  reperes;
   constructor(public navCtrl: NavController, 
     public modalCtrl : ModalController,
     public toastCtrl: ToastController,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private sqliteCtrl : SQLitePage) {
    
+  }
+
+  ionViewWillEnter() {
+    this.sqliteCtrl.getAll('REPERES').then((results) => {
+      var data = JSON.stringify(results);
+      this.reperes = JSON.parse(data);
+    });
+
   }
 
 
