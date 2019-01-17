@@ -11,6 +11,7 @@ import { Photo } from './takephoto';
 
 
 import { Audio } from './priseaudio';
+import { Gps } from './gps';
 
 @Component({
   selector: 'page-home',
@@ -25,13 +26,15 @@ export class HomePage {
     public photoCtrl : Photo,
     public audioCtrl : Audio,
     public bddCtrl : CreateTable,
-    public sqliteCtrl : SQLitePage
+    public sqliteCtrl : SQLitePage,
+    public gpsCtrl : Gps
     ) { 
      
       
   }
 
   click($position: string) : void{
+    let latitude = this.gpsCtrl.getlatitude();
     let filePath = this.audioCtrl.startRecord();
     //Attendre 5 secondes et stop record
     let TIME_IN_MS = 5000;
@@ -44,7 +47,7 @@ export class HomePage {
         });
         toast.present().then(()=>{
           //Enregistrement dans la base de données
-          let array = ['repere test',filePath];
+          let array = ['repere test',filePath,latitude];
           this.sqliteCtrl.insert('REPERES',array);
         });    
      }, TIME_IN_MS);
