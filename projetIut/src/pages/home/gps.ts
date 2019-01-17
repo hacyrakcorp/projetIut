@@ -6,7 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation'
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class Gps {
+export class HomePage {
   lat: any;
   lng: any;
   constructor(
@@ -15,11 +15,10 @@ export class Gps {
 
   }
 
-  getlatitude (){
-    this.geo.getCurrentPosition().then((resp) => {
-    resp.coords.latitude;
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-      }
+  ionViewDidLoad(){
+    this.geo.getCurrentPosition().then( pos => {
+      this.lat = pos.coords.latitude;
+      this.lng = pos.coords.longitude;
+    }).catch( err => console.log(err));
+  }
 }

@@ -30,9 +30,6 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FdrServiceProvider } from '../providers/fdr-service/fdr-service';
 
-
-import { Geolocation } from '@ionic-native/geolocation'
-
 @NgModule({
   declarations: [
     MyApp,
@@ -69,7 +66,6 @@ import { Geolocation } from '@ionic-native/geolocation'
     SplashScreen,
     GlobalServiceProvider,
     HttpClientModule,
-    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CreateTable,SQLite,SQLitePage,
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
