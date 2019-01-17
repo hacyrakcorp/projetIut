@@ -31,6 +31,8 @@ import { GlobalServiceProvider } from '../providers/global-service/global-servic
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
+import { GoogleMaps } from '@ionic-native/google-maps';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -69,6 +71,7 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     GlobalServiceProvider,
     HttpClientModule,
+    GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CreateTable,SQLite,SQLitePage,
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
