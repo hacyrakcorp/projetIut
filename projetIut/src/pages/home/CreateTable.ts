@@ -49,7 +49,7 @@ export class CreateTable {
   }
 
   public insert($table,$array){
-    alert('enter \n'+this.emplacement);
+    //alert('enter \n'+this.emplacement);
     this.sqlite.create({
       name: 'data.db',
       location: this.emplacement // the location field is required

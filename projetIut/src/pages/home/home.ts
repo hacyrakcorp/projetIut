@@ -42,14 +42,25 @@ export class HomePage {
           duration: 3000,
           position : $position
         });
-        toast.present();
-       // this.bddCtrl.createDatabase();
-       //Enregistrement dans la base de données
-      // let array = ['repere test','','','',filePath];
-      // this.bddCtrl.insert('FDR',array);
+        toast.present().then(()=>{
+          //Enregistrement dans la base de données
+          let array = ['repere test',filePath];
+          this.sqliteCtrl.insert('REPERES',array);
+        });    
      }, TIME_IN_MS);
     
     // this.photoCtrl.photoshoot();
+  }
+  select():void {  
+    
+    this.sqliteCtrl.getAll('REPERES').then((results) => {
+      var data = JSON.stringify(results);
+      var reperes = JSON.parse(data);
+      alert(data);
+      for (let repere of reperes){
+        alert(repere.audio);
+      } 
+    })
   }
 
   play(file,idx){
