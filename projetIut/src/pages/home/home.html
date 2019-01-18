@@ -8,7 +8,7 @@
   <h2>Welcome to {{global.titleApp}} !</h2>
   <h3>(ou autre nom pour l'app)</h3>
   <p>Ici vous pouvez à chaque instant sauvegarder votre position.</p>
-  <button id="save-button" ion-button full (click)="click('middle')">
+  <button id="save-button" ion-button full (click)="click('middle')" [disabled]="!isenabled">
       <ion-icon id="save-icon" name="pin"></ion-icon>
   </button>
 

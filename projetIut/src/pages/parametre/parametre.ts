@@ -1,25 +1,26 @@
+var opt_audio: boolean = false;
+
 import { Component } from '@angular/core';
-//import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'page-parametre',
   templateUrl: 'parametre.html'
 })
-export class ParametrePage {
-  private opt_audio : boolean;
 
-  constructor(
-    //public navCtrl: NavController
-    ) {
-      this.opt_audio = false;
-  }
+export class ParametrePage {
+
+  constructor() {}
 
   getOpt_audio(){
-    return this.opt_audio;
+    return opt_audio;
   }
 
-  notify(){
-    this.opt_audio;
+  notifyAudio(){
+    if (this.getOpt_audio()){ 
+      opt_audio = false;
+    } else {
+      opt_audio = true;
+    }
   }
 
 }
