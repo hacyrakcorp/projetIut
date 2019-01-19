@@ -23,11 +23,12 @@ export class AffichageMap {
       });*/
   }
 
-  loadMap() {
+  loadMap(repere) {
     //alert('loadmap');
     // create a new map by passing HTMLElement
     //let el = this.elRef.nativeElement;
     //let element: HTMLElement = el.getElementById('map');
+    alert(repere.latitude);
     let element: HTMLElement = document.getElementById('map');
     //alert(element);
     let map: GoogleMap = this.googleMaps.create(element);
@@ -46,7 +47,7 @@ export class AffichageMap {
     );
 
     // create LatLng object
-    let ionic: LatLng = new LatLng(43.0741904,-89.3809802);
+    let ionic: LatLng = new LatLng(repere.latitude,repere.longitude);
 
     // create CameraPosition
     let position: CameraPosition<LatLng> = {

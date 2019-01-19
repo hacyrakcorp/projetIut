@@ -50,7 +50,7 @@ export class RepereInfoPage {
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
-      this.carteCtrl.loadMap();
+      this.carteCtrl.loadMap(this.repere);
   });
     console.log('ionViewDidLoad RepereInfoPage');
   }
