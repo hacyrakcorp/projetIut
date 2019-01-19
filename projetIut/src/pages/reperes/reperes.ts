@@ -26,7 +26,7 @@ export class ReperesPage {
     private sqliteCtrl : SQLitePage) {
    
   }
-
+  
   ionViewWillEnter() {
     this.sqliteCtrl.getAll('REPERES').then((results) => {
       var data = JSON.stringify(results);
@@ -35,9 +35,10 @@ export class ReperesPage {
 
   }
 
-
   selectRepere(repere) {
-    let modal = this.modalCtrl.create(RepereInfoPage,
+    this.navCtrl.push(RepereInfoPage,
+      { item: repere });
+    /*let modal = this.modalCtrl.create(RepereInfoPage,
       { item: repere });
 
      modal.onDidDismiss((rep) => {
@@ -63,7 +64,7 @@ export class ReperesPage {
         
        }
      });
-	  modal.present();
+	  modal.present();*/
   }
 
 }

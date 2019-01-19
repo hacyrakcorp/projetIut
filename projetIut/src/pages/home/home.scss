@@ -1,3 +1,7 @@
+/*ion-app._gmaps_cdv_ .nav-decor{
+    background-color: transparent !important;
+  }*/
+
 page-home {
     #save-button {
         //Bouton rond
@@ -9,6 +13,12 @@ page-home {
 
     #save-icon{
         font-size: 700%;
+    }
+
+    #map {
+        height: 50%;
+        width: 50%;
+        margin: auto;
     }
 
 

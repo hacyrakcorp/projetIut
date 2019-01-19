@@ -19,12 +19,16 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Audio } from '../pages/home/priseaudio';
 import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
-import { GPS } from '../pages/home/GPS';
+
+import { GPS } from '../pages/home/gps';
+import { AffichageMap } from '../pages/repere-info/googleMap';
+import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation'
 
 import { CreateTable } from '../pages/home/CreateTable';
 import { SQLitePage } from '../pages/home/SQLitePage';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalServiceProvider } from '../providers/global-service/global-service';
@@ -41,8 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomePage,
     TabsPage,
     Audio,
-    Photo,
-    GPS
+    Photo
  
   ],
   imports: [
@@ -61,8 +64,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomePage,
     TabsPage,
     Photo,
-    Audio,
-    GPS
+    Audio
   ],
   providers: [
     StatusBar,
@@ -74,7 +76,7 @@ import { HttpClientModule } from '@angular/common/http';
     CreateTable,SQLite,SQLitePage,
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
     Audio,Media,File,
-    GPS,Geolocation
+    GPS,GoogleMaps,Geolocation,AffichageMap
   ]
 })
 export class AppModule {}

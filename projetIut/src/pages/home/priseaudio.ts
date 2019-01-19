@@ -116,5 +116,18 @@ export class Audio {
       this.audio.play();
       this.audio.setVolume(0.8);
     }
+
+    stopAudio(file){
+      if (this.platform.is('ios')) {
+        this.audio = this.media.create(file);
+      }
+      else if (this.platform.is('android')) {
+        this.audio = this.media.create(file);
+      } else if (this.platform.is('cordova')) {
+        this.filePath = 'C:/Projets/projetIut/projetIut/' + file;
+        this.audio = this.media.create(file);
+      }
+      this.audio.stop();
+    }
     
 }

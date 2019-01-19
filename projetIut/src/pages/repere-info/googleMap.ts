@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { Platform } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
@@ -6,34 +6,40 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, CameraPosition, MarkerO
 
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-repere-info',
+  templateUrl: 'repere-info.html'
 })
-export class GPS {
+export class AffichageMap {
   lat: any;
   lng: any;
   constructor(
     public geo: Geolocation,
     private googleMaps: GoogleMaps, 
-    public platform: Platform) {
-      platform.ready().then(() => {
-          alert('carte');
+   // public platform: Platform
+    ) {
+      /*platform.ready().then(() => {
+          alert('affichageMap');
         this.loadMap();
-      });
+      });*/
   }
 
   loadMap() {
-    alert('loadmap');
+    //alert('loadmap');
     // create a new map by passing HTMLElement
+    //let el = this.elRef.nativeElement;
+    //let element: HTMLElement = el.getElementById('map');
     let element: HTMLElement = document.getElementById('map');
-    alert(element);
+    //alert(element);
     let map: GoogleMap = this.googleMaps.create(element);
+    //alert(map);
     // listen to MAP_READY event
     // You must wait for this event to fire before adding something to the map or modifying it in anyway
    // alert(GoogleMapsEvent.MAP_READY);
     map.one(GoogleMapsEvent.MAP_READY).then(
       () => {
         alert('map');
+        let appRoot = <HTMLCollectionOf<any>>document.getElementsByClassName("app-root");
+        appRoot[0].style.opacity = 1;
         console.log('Map is ready!');
         // Now you can add elements to the map like the marker
       }

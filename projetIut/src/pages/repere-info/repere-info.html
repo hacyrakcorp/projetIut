@@ -6,13 +6,15 @@
 -->
 <ion-header>
   <ion-navbar class ="toolbar toolbar-ios">
-    <ion-title class ="title title-ios"><div class="toolbar-title toolbar-title-ios">Information sur le repere</div></ion-title>
-    <button ion-button (click)="fermeture()">Fermer</button>
+    <ion-title class ="title title-ios"><div class="toolbar-title toolbar-title-ios">Informations</div></ion-title>
+   <!-- <button ion-button (click)="fermeture()">Fermer</button>-->
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <div #map id="map"></div>
   <ion-item>
     <ion-label color="primary" fixed>Nom</ion-label>
     <ion-input type="nom" [(ngModel)]="nom" placeholder="Nom du repère"></ion-input>
@@ -32,9 +34,6 @@
     </button>
     <p item-end>{{audioName}}</p>
   </ion-item>
-  
-
-
 </ion-content>
 
 <ion-footer>

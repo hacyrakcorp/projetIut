@@ -9,29 +9,32 @@ import { SQLitePage } from './SQLitePage';
 
 import { Photo } from './takephoto';
 import { Audio } from './priseaudio';
-import { GPS } from './GPS';
+import { GPS } from './gps';
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  
+  isenabled:boolean=true;
+
+
   constructor(
     public navCtrl: NavController,
-    private toastCtrl: ToastController,
+   // private toastCtrl: ToastController,
     private global : GlobalServiceProvider,
-    private photoCtrl : Photo,
-    private audioCtrl : Audio,
+    //private photoCtrl : Photo,
+    //private audioCtrl : Audio,
     //private bddCtrl : CreateTable,
-    private sqliteCtrl : SQLitePage,
-    private GPSCtrl : GPS,
-    private paramCtrl : ParametrePage
+    //private sqliteCtrl : SQLitePage,
+    //private GPSCtrl : GPS,
+    //private paramCtrl : ParametrePage
     ) { 
       
-  }
-  isenabled:boolean=true;
-  click($position: string) : void{
+    }
+  
+  /*click($position: string) : void{
     var latitude : any;
     var longitude : any;
     const TABLE_REPERES : string = 'REPERES';
@@ -74,7 +77,7 @@ export class HomePage {
     // this.photoCtrl.photoshoot();
 
     
-  }
+  }*/
 
   //Test bdd
   /*select():void {  
