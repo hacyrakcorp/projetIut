@@ -89,13 +89,13 @@
     <plugin name="cordova-sqlite-storage" spec="2.5.2" />
     <plugin name="cordova-plugin-media-capture" spec="3.0.2" />
     <plugin name="cordova-plugin-media" spec="5.0.2" />
-    <plugin name="cordova-plugin-geolocation" spec="4.0.1">
-        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="I see you" />
-    </plugin>
     <plugin name="cordova-plugin-googlemaps" spec="2.4.6">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBo9OIJ51NGXjlVd6UMLUyvpdDgveOj718" />
         <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+    </plugin>
+    <plugin name="cordova-plugin-geolocation" spec="4.0.1">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="6.3.0" />

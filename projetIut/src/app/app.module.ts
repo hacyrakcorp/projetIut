@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
@@ -10,20 +10,21 @@ import { ParametrePage } from '../pages/parametre/parametre';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { PrisePhoto } from '../pages/home/prisePhoto';
 import { Photo } from '../pages/home/takephoto';
 import { Camera } from '@ionic-native/camera';
-import { CameraPreview, CameraPreviewOptions} from '@ionic-native/camera-preview';
+import { CameraPreview } from '@ionic-native/camera-preview';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 import { Audio } from '../pages/home/priseaudio';
-import { Media, MediaObject } from '@ionic-native/media';
+import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 
 import { GPS } from '../pages/home/gps';
 import { AffichageMap } from '../pages/repere-info/googleMap';
 import { GoogleMaps } from '@ionic-native/google-maps';
-import { Geolocation } from '@ionic-native/geolocation'
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { CreateTable } from '../pages/home/CreateTable';
 import { SQLitePage } from '../pages/home/SQLitePage';
@@ -45,7 +46,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomePage,
     TabsPage,
     Audio,
-    Photo
+    Photo,
+    PrisePhoto
  
   ],
   imports: [
@@ -74,9 +76,22 @@ import { HttpClientModule } from '@angular/common/http';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ParametrePage,
     CreateTable,SQLite,SQLitePage,
-    Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
+    Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,PrisePhoto,
     Audio,Media,File,
-    GPS,GoogleMaps,Geolocation,AffichageMap
+    GPS,GoogleMaps,,AffichageMap,Geolocation
   ]
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor(
+    public platform: Platform,
+    androidPermissions: AndroidPermissions
+  ) {
+      platform.ready().then(()=>{
+        androidPermissions.requestPermissions([
+          androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+          androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+        ]);
+      });
+  }
+}

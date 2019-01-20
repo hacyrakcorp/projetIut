@@ -7,14 +7,19 @@
 <ion-header>
   <ion-navbar class ="toolbar toolbar-ios">
     <ion-title class ="title title-ios"><div class="toolbar-title toolbar-title-ios">Informations</div></ion-title>
-   <!-- <button ion-button (click)="fermeture()">Fermer</button>-->
+    <ion-buttons end>
+      <button ion-button icon-only (click)="supprimer()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
 
-  <div #map id="map"></div>
+    <img id="photo" [src]="image" alt="Image" />
+    <div #map id="map"></div>
   <ion-item>
     <ion-label color="primary" fixed>Nom</ion-label>
     <ion-input type="nom" [(ngModel)]="nom" placeholder="Nom du repère"></ion-input>
@@ -27,10 +32,13 @@
     <ion-label color="primary" fixed>Longitude</ion-label>
     <ion-input type="longitude" [(ngModel)]="longitude" placeholder="Longitude"></ion-input>
   </ion-item>
-  <ion-item> 
+  <ion-item *ngIf="audio != ''"> 
     <ion-label color="primary" fixed>Audio</ion-label>
-    <button ion-button item-content (click)="play(audio)">
+    <button ion-button item-content (click)="play(audio)" *ngIf="!playing">
         <ion-icon name="play"></ion-icon>
+    </button>
+    <button ion-button item-content (click)="stop()" *ngIf="playing">
+        <ion-icon name="square"></ion-icon>
     </button>
     <p item-end>{{audioName}}</p>
   </ion-item>

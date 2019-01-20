@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 //des import pour les fichiers et les médias
 import { Platform } from 'ionic-angular';
 import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
-//import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 
 
 
@@ -26,7 +24,6 @@ export class Audio {
 
   //constructeur
   constructor(
-    //public navCtrl: NavController, 
     private media: Media,  
     private file: File, 
     public platform: Platform
@@ -117,17 +114,12 @@ export class Audio {
       this.audio.setVolume(0.8);
     }
 
-    stopAudio(file){
-      if (this.platform.is('ios')) {
-        this.audio = this.media.create(file);
-      }
-      else if (this.platform.is('android')) {
-        this.audio = this.media.create(file);
-      } else if (this.platform.is('cordova')) {
-        this.filePath = 'C:/Projets/projetIut/projetIut/' + file;
-        this.audio = this.media.create(file);
-      }
+    stopAudio(){
       this.audio.stop();
+    }
+
+    pauseAudio(){
+      this.audio.pause();
     }
     
 }
