@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { GlobalServiceProvider } from '../../providers/global-service/global-service';
-
+import { Insomnia } from '@ionic-native/insomnia';
 //import { CreateTable } from './CreateTable';
 import { ParametrePage } from '../parametre/parametre';
 import { SQLitePage } from './SQLitePage';
@@ -32,11 +32,20 @@ export class HomePage {
     //private bddCtrl : CreateTable,
     private sqliteCtrl : SQLitePage,
     private GPSCtrl : GPS,
-    private paramCtrl : ParametrePage
+    private paramCtrl : ParametrePage,
+    private insomnia: Insomnia
     ) { 
+
+      this.insomnia.keepAwake()
+      .then(
+        () => console.log('insomnia'),
+        () => console.log('error')
+      );
       
     }
+
   
+
   click($position: string) : void{
     var dateHeure = this.getDateHeure();
 

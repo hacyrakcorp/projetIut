@@ -35,6 +35,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalServiceProvider } from '../providers/global-service/global-service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Insomnia } from '@ionic-native/insomnia';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { HttpClientModule } from '@angular/common/http';
     CreateTable,SQLite,SQLitePage,
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,PrisePhoto,
     Audio,Media,File,
-    GPS,GoogleMaps,,AffichageMap,Geolocation
+    GPS,GoogleMaps,,AffichageMap,Geolocation,
+    Insomnia
   ]
 })
 export class AppModule {
