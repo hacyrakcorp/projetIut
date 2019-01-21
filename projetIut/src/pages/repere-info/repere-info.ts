@@ -1,7 +1,6 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
-import {GoogleMaps, GoogleMap, LatLng, GoogleMapsEvent,} from '@ionic-native/google-maps';
 
 /**
  * Generated class for the RepereInfoPage page.
@@ -26,16 +25,9 @@ export class RepereInfoPage {
   audio:string;
   repere;
 
-  @ViewChild('map') 
-  private mapElement: ElementRef;
-  private map:GoogleMap;
-  private location:LatLng;
-
   constructor(public viewCtrl: ViewController, 
     public navParams: NavParams,
-    private alertCtrl: AlertController,
-    private platform : Platform,
-    private googleMaps: GoogleMaps) {
+    private alertCtrl: AlertController) {
    /* let alert = this.alertCtrl.create({
       title: navParams.get('userId'),
       buttons: ['Dismiss']
@@ -51,25 +43,11 @@ export class RepereInfoPage {
       latitude:navParams.get('item').latitude,
       longitude:navParams.get('item').longitude
     };
-    this.location = new LatLng(42.346903, -71.135101);
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RepereInfoPage');
-
-    this.platform.ready().then(() => {
-      let element = this.mapElement.nativeElement;
-      this.map = this.googleMaps.create(element);
-   
-      this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
-        let options = {
-          target: this.location,
-          zoom: 8
-        };
-   
-        this.map.moveCamera(options);
-      });
-    });
   }
 
   
@@ -92,22 +70,5 @@ export class RepereInfoPage {
       this.viewCtrl.dismiss();
     }
     
-  }
-
-  addMarker() {
-    this.map.addMarker({
-      title: 'My Marker',
-      icon: 'blue',
-      animation: 'DROP',
-      position: {
-        lat: this.location.lat,
-        lng: this.location.lng
-      }
-    })
-    .then(marker => {
-      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-        alert('Marker Clicked');
-      });
-    });
   }
 }
