@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { RepereInfoPage } from '../repere-info/repere-info';
 import { ToastController } from 'ionic-angular';
@@ -23,21 +23,25 @@ export class ReperesPage {
     public modalCtrl : ModalController,
     public toastCtrl: ToastController,
     private alertCtrl: AlertController,
-    private sqliteCtrl : SQLitePage) {
+    private sqliteCtrl : SQLitePage, public platform : Platform) {
    
   }
-
+  
   ionViewWillEnter() {
-    this.sqliteCtrl.getAll('REPERES').then((results) => {
-      var data = JSON.stringify(results);
-      this.reperes = JSON.parse(data);
+    this.platform.ready().then(() => {
+      this.sqliteCtrl.getAll('REPERES').then((results) => {
+        var data = JSON.stringify(results);
+       // this.reperes = JSON.parse(data);
+       this.reperes = results;
+      });
     });
 
   }
 
-
   selectRepere(repere) {
-    let modal = this.modalCtrl.create(RepereInfoPage,
+    this.navCtrl.push(RepereInfoPage,
+      { repere });
+    /*let modal = this.modalCtrl.create(RepereInfoPage,
       { item: repere });
 
      modal.onDidDismiss((rep) => {
@@ -63,7 +67,7 @@ export class ReperesPage {
         
        }
      });
-	  modal.present();
+	  modal.present();*/
   }
 
 }

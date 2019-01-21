@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+
 
 @Component({
   selector: 'page-home',
@@ -8,54 +10,50 @@ import { Geolocation } from '@ionic-native/geolocation';
 export class GPS {
   lat: any;
   lng: any;
-  constructor(
-    public geo: Geolocation) {
 
+  constructor(
+    public platform: Platform,
+    private geo: Geolocation
+    ) {
+      
   }
 
- /* ionViewDidLoad(){
-    /*this.geo.getCurrentPosition().then( pos => {
+  /*ionViewDidLoad(){
+    this.geo.getCurrentPosition().then( pos => {
       this.lat = pos.coords.latitude;
       this.lng = pos.coords.longitude;
     }).catch( err => console.log(err));
-}*/
+  }*/
 
   getLatitude(){
     return new Promise ((resolve) =>
     {
-      var latitude;
-      this.geo.getCurrentPosition(
-
-      ).then( (pos) => {
-        latitude = pos.coords.latitude;
-        resolve(latitude);
-      }).catch( 
-        (err) => {
-          console.log(err);
-          alert(err);
-      }
-      )
-   }
-   );
+        var latitude;
+        this.platform.ready().then(() => {
+            this.geo.getCurrentPosition(
+              {timeout: 30000,enableHighAccuracy: true}
+            ).then((resp) => {
+              latitude = resp.coords.latitude;
+              resolve(latitude);
+           }).catch((e)=> {alert(e.message)});
+        });
+    });
   }
 
   getLongitude(){
     return new Promise ((resolve) =>
     {
-      var longitude;
-      this.geo.getCurrentPosition(
-
-      ).then( (pos) => {
-        longitude = pos.coords.longitude;
-        resolve(longitude);
-      }).catch( 
-        (err) => {
-          console.log(err);
-          alert(err);
-      }
-      )
-   }
-   );
+        var longitude;
+        this.platform.ready().then(() => {
+            this.geo.getCurrentPosition(
+              {timeout: 30000,enableHighAccuracy: true}
+            ).then((resp) => {
+              longitude = resp.coords.longitude;
+              resolve(longitude);
+           }).catch((e)=> {alert(e.message)});
+        });
+    });
   }
+
 
 }

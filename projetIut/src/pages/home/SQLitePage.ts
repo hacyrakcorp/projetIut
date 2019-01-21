@@ -56,8 +56,10 @@ export class SQLitePage {
                 "name VARCHAR(32), "+
                 "latitude DOUBLE, "+
                 "longitude DOUBLE, "+
+                "photo TEXT, "+
                 "image BLOB, "+
-                "audio VARCHAR(250)"+
+                "audio VARCHAR(250), "+
+                "commentaire VARCHAR(250)" +
                 ")",[]
             ).then(() => {
                 console.log('Table Repères created !');
@@ -74,8 +76,8 @@ export class SQLitePage {
         ).then(() => {
             this.db.executeSql(
                 'INSERT INTO '+
-                $table+' (name,latitude,longitude,audio) '+
-                'VALUES (?,?,?,?)', $array
+                $table+' (name,latitude,longitude,image,audio,photo) '+
+                'VALUES (?,?,?,?,?,?)', $array
             ).then(() => {
                 console.log('Insert réussi');
                 //alert('insert ok');
@@ -105,7 +107,7 @@ export class SQLitePage {
                                 name : results.rows.item(i).name,
                                 latitude : results.rows.item(i).latitude,
                                 longitude : results.rows.item(i).longitude,
-                                image : results.rows.item(i).image,
+                                image : results.rows.item(i).photo,
                                 audio : results.rows.item(i).audio
                             });
                            // alert(results.rows.item(i).audio);
