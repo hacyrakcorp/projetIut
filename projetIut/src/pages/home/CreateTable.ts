@@ -62,29 +62,36 @@ export class CreateTable {
     });
   }
 
-  public update($table,$array){
-    this.sqlite.create({ //Ouvre ou créer la bdd
-      name: 'data.db',
-      location: this.emplacement
-    })
-    .then((db : SQLiteObject) => {
-      db.executeSql('UPDATE '+$table+' SET ? WHERE id = '+ $array['id'], $array) //execute le code sql pour mettre à jour une table
-      .then(() => console.log('Executed SQL, Update'))
-      .catch(e => console.log(e));
-    });
-  }
+  private update(): void {
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql('UPDATE '+$table+' SET ? WHERE id = '+ $array['id'], $array,[]
+            ).then(() => {
+                console.log('Table update !');
+                //alert('Table update');
+            })
+            .catch(e => console.log(e)
+            );
+        });
+    }
 
-  public delete($table,$id){
-    this.sqlite.create({ //Ouvre ou créer la bdd
-      name: 'data.db',
-      location: this.emplacement // the location field is required
-    })
-    .then((db : SQLiteObject) => {
-      db.executeSql('DELETE '+$table+' WHERE id = '+$id) //execute le code sql pour supprimer une données
-      .then(() => console.log('Executed SQL, Delete'))
-      .catch(e => console.log(e));
-    });
-  }
+	
+	private delete(): void {
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql('DELETE '+$table+' WHERE id = '+$id,[]
+            ).then(() => {
+                console.log('Table update !');
+                //alert('Table update');
+            })
+            .catch(e => console.log(e)
+            );
+        });
+    }
+	
+ 
 
   public addcom($table,$id,$com){
     this.sqlite.create({ //Ouvre ou créer la bdd
