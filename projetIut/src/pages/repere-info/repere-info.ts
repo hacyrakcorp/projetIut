@@ -40,14 +40,6 @@ export class RepereInfoPage {
       this.longitude = rep.longitude;
       this.audio = rep.audio;
       this.image = rep.image;
-      alert(this.image);
-      /*blobToBase64String(this.image).then((base64String) => {
-        // success
-        alert(base64String);
-      }).catch(function (err) {
-        // error
-        alert(err.message);
-      });*/
       
       let derniereSeparation = this.audio.lastIndexOf('/');
       this.audioName = this.audio.substring(derniereSeparation+1,this.audio.length).toLowerCase();
@@ -59,7 +51,6 @@ export class RepereInfoPage {
         audio: this.audio,
         image: this.image
       };
-
   }
 
   ionViewDidLoad() {

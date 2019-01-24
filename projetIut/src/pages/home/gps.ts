@@ -25,18 +25,35 @@ export class GPS {
     }).catch( err => console.log(err));
   }*/
 
+  getLatitudeLongitude(){
+     return new Promise ((resolve) =>
+    {
+        var latitude;
+        var longitude;
+        //this.platform.ready().then(() => {
+            this.geo.getCurrentPosition(
+              {timeout: 30000,enableHighAccuracy: false, maximumAge:0}
+            ).then((resp) => {
+              latitude = resp.coords.latitude;
+              longitude = resp.coords.longitude;
+              resolve({latitude,longitude});
+           }).catch((e)=> {alert(e.message)});
+       // });
+    });
+  }
+
   getLatitude(){
     return new Promise ((resolve) =>
     {
         var latitude;
-        this.platform.ready().then(() => {
+        //this.platform.ready().then(() => {
             this.geo.getCurrentPosition(
               {timeout: 30000,enableHighAccuracy: true}
             ).then((resp) => {
               latitude = resp.coords.latitude;
               resolve(latitude);
            }).catch((e)=> {alert(e.message)});
-        });
+       // });
     });
   }
 
@@ -44,14 +61,14 @@ export class GPS {
     return new Promise ((resolve) =>
     {
         var longitude;
-        this.platform.ready().then(() => {
+       // this.platform.ready().then(() => {
             this.geo.getCurrentPosition(
               {timeout: 30000,enableHighAccuracy: true}
             ).then((resp) => {
               longitude = resp.coords.longitude;
               resolve(longitude);
            }).catch((e)=> {alert(e.message)});
-        });
+      // });
     });
   }
 

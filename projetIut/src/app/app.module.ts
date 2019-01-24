@@ -87,13 +87,21 @@ export class AppModule {
 
   constructor(
     public platform: Platform,
-    androidPermissions: AndroidPermissions
+    androidPermissions: AndroidPermissions,
+    private insomnia: Insomnia
   ) {
       platform.ready().then(()=>{
         androidPermissions.requestPermissions([
           androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
           androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+          androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
         ]);
+
+        this.insomnia.keepAwake()
+      .then(
+        () => console.log('insomnia'),
+        () => console.log('error')
+      );
       });
   }
 }

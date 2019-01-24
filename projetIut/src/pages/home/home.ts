@@ -2,16 +2,13 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { GlobalServiceProvider } from '../../providers/global-service/global-service';
-import { Insomnia } from '@ionic-native/insomnia';
-//import { CreateTable } from './CreateTable';
+
 import { ParametrePage } from '../parametre/parametre';
 import { SQLitePage } from './SQLitePage';
 
 import { Photo } from './takephoto';
 import { Audio } from './priseaudio';
-import { PrisePhoto } from './prisePhoto';
 import { GPS } from './gps';
-
 
 @Component({
   selector: 'page-home',
@@ -27,46 +24,38 @@ export class HomePage {
     private toastCtrl: ToastController,
     private global : GlobalServiceProvider,
     private photoCtrl : Photo,
-    private prisePhotoCtrl : PrisePhoto,
     private audioCtrl : Audio,
-    //private bddCtrl : CreateTable,
     private sqliteCtrl : SQLitePage,
     private GPSCtrl : GPS,
-    private paramCtrl : ParametrePage,
-    private insomnia: Insomnia
+    private paramCtrl : ParametrePage
     ) { 
 
-      this.insomnia.keepAwake()
-      .then(
-        () => console.log('insomnia'),
-        () => console.log('error')
-      );
+      
       
     }
 
   
-
   click($position: string) : void{
     var dateHeure = this.getDateHeure();
 
     this.platform.ready().then(() => {
+      //init
       this.repereName ='repere '+ dateHeure;
       var latitude : any;
       var longitude : any;
       const TABLE_REPERES : string = 'REPERES';
       this.isenabled=false;
 
-      //Récupération coordonnées GPS
-      this.GPSCtrl.getLatitude(  
-      ).then((results) => {
-        latitude = JSON.stringify(results);
-        this.GPSCtrl.getLongitude(
-        ).then((results) => {
-          longitude = JSON.stringify(results);
+      //Enregistrement GPS
+      this.GPSCtrl.getLatitudeLongitude().then((coordonnees) =>{
+        let data = JSON.parse(JSON.stringify(coordonnees));
+        latitude = data.latitude;
+        longitude = data.longitude;
+        this.isenabled=true;
 
           //Enregistrement Audio
-          if (this.paramCtrl.getOpt_audio() == true){
-            alert('audio true'); 
+         if (this.paramCtrl.getOpt_audio() == true){
+            
             let filePath = this.audioCtrl.startRecord();
             let TIME_IN_MS = 5000;
             setTimeout( () => {  //Attendre 5 secondes et stop record
@@ -76,34 +65,39 @@ export class HomePage {
                     duration: 3000,
                     position : $position
                 });
-                toast.present().then(()=>{
-                  //Enregistrement dans la base de données
-                  let array = [this.repereName,latitude,longitude,filePath];
+                //Enregistrement photo
+                if (this.paramCtrl.getOpt_photo() == true){  
+                  this.photoCtrl.photoshoot().then((base64) => {
+                    let array = [this.repereName,latitude,longitude,'',filePath,base64];
+                    this.sqliteCtrl.insert(TABLE_REPERES,array);
+                    this.isenabled = true;
+                  });
+                  toast.present()
+                } else {
+                  let array = [this.repereName,latitude,longitude,'',filePath,''];
                   this.sqliteCtrl.insert(TABLE_REPERES,array);
                   this.isenabled = true;
-                });    
+                } 
             }, TIME_IN_MS);
-          } else { // Pas d'enregistrement audio 
-            //alert('audio false');   
-            //Enregistrement photo
-            this.photoCtrl.photoshoot().then((base64) => {
-              alert('photo true');
-              //let blob = this.photoCtrl.b64toBlob(base64,'',512);
-              //alert(blob);
-              alert(base64);
-              let array = [this.repereName,latitude,longitude,'','',base64];
-              this.sqliteCtrl.insert(TABLE_REPERES,array); 
-              this.isenabled = true; 
-            });
+          } else { // Pas d'enregistrement audio
+            //
+          //  alert('audio false');
+            if (this.paramCtrl.getOpt_photo() == true){
+              //Enregistrement photo
+              this.photoCtrl.photoshoot().then((base64) => {
+                let array = [this.repereName,latitude,longitude,'','',base64];
+                this.sqliteCtrl.insert(TABLE_REPERES,array); 
+                this.isenabled = true;
+              });
+            } else {
+                let array = [this.repereName,latitude,longitude,'','',''];
+                this.sqliteCtrl.insert(TABLE_REPERES,array);
+                this.isenabled = true;
+            }
+
           }  
-        })
-      })
+      });
     });
-    
-
-    // this.photoCtrl.photoshoot();
-
-    
   }
 
   getDateHeure():string{

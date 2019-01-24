@@ -1,5 +1,5 @@
 var opt_audio: boolean = false;
-
+var opt_photo: boolean = false;
 import { Component } from '@angular/core';
 
 @Component({
@@ -14,6 +14,19 @@ export class ParametrePage {
   getOpt_audio(){
     return opt_audio;
   }
+
+  getOpt_photo(){
+    return opt_photo;
+  }
+
+  notifyPhoto(){
+    if(this.getOpt_photo()){
+      opt_photo = false;
+    } else {
+      opt_photo = true;
+    }
+  }
+
 
   notifyAudio(){
     if (this.getOpt_audio()){ 
