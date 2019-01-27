@@ -8,12 +8,21 @@ import { ToastController, NavController } from 'ionic-angular';
   templateUrl: 'insertCategorie.html',
 })
 export class InsertCategoriePage {
+    categories:any;
     libelle:String='';
     constructor(
         private sqlCtrl : SQLitePage,
         private toastCtrl : ToastController,
         private navCtrl : NavController
-        ) {}
+        ) {
+
+        }
+    ionViewDidEnter(){
+        this.sqlCtrl.getAll('CATEGORIES')
+        .then((result)=>{
+            this.categories = result;
+        })
+    }
     insertCategorie(){
         if (this.libelle != ''){
             this.sqlCtrl.insertCategorie([this.libelle]);
@@ -28,5 +37,9 @@ export class InsertCategoriePage {
             alert('Pas de catégorie renseignée');
         }
         
+    }
+    supprimerCategorie(lib){
+        this.sqlCtrl.deleteCategorie(lib);
+        this.ionViewDidEnter();
     }
 }

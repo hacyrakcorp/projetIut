@@ -99,6 +99,29 @@ export class SQLitePage {
         });
     }
 
+    public deleteCategorie($libelle){
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                "DELETE FROM CATEGORIES "+
+                "WHERE libelle = '"+ $libelle+"'"
+            ).then(() => {
+                this.db.executeSql(
+                    "SELECT * FROM CATEGORIES WHERE categorie = '"+ $libelle+"'"
+                ).then((result)=> {
+                    result.DELETE;
+                    console.log('supp réussi');
+                    alert('supp categorie ok');
+                }
+                )
+               
+            }).catch(e => {
+                console.log(e)}
+            );
+        });
+    }
+
 
     public insert($table:string, $array:any[]) {
         this.sqlite.create(

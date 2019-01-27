@@ -10,6 +10,8 @@
 
 <ion-content>
     <ion-list>
+        <ion-list-header>Ajouter une catégorie</ion-list-header>
+        
             <ion-item>
                 <ion-label color="primary" fixed>Libellé</ion-label>
                 <ion-input type="libelle" [(ngModel)]="libelle" placeholder="Catégorie">
@@ -18,9 +20,19 @@
             </ion-item>
             <ion-item>
                 <button ion-button color="primary" float-right 
-                (click)="insertCategorie()">Ajouter
+                (click)="insertCategorie()">Ajouter 
                     <ion-icon name="add"></ion-icon> 
                 </button>
             </ion-item>
+    </ion-list>
+    <ion-list> 
+            <ion-list-header>Gérer les catégories</ion-list-header>
+        <ion-item *ngFor="let cat of categories">
+            {{cat.libelle}}
+            <button ion-button color="danger" float-right
+            (click)="supprimerCategorie(cat.libelle)">
+                <ion-icon name="trash"></ion-icon> 
+            </button>
+        </ion-item>
     </ion-list>
 </ion-content>
