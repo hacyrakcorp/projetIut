@@ -107,18 +107,10 @@ export class SQLitePage {
                 "DELETE FROM CATEGORIES "+
                 "WHERE libelle = '"+ $libelle+"'"
             ).then(() => {
-                this.db.executeSql(
-                    "SELECT * FROM CATEGORIES WHERE categorie = '"+ $libelle+"'"
-                ).then((result)=> {
-                    result.DELETE;
-                    console.log('supp réussi');
-                    alert('supp categorie ok');
-                }
-                )
-               
+                
             }).catch(e => {
                 console.log(e)}
-            );
+            );  
         });
     }
 

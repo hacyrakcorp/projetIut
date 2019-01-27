@@ -41,5 +41,6 @@ export class InsertCategoriePage {
     supprimerCategorie(lib){
         this.sqlCtrl.deleteCategorie(lib);
         this.ionViewDidEnter();
+        
     }
 }
