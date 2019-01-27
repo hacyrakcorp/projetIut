@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar class ="toolbar toolbar-ios">
+        <ion-title class ="title title-ios">
+            <div class="toolbar-title toolbar-title-ios">
+                Catégorie
+            </div>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+            <ion-item>
+                <ion-label color="primary" fixed>Libellé</ion-label>
+                <ion-input type="libelle" [(ngModel)]="libelle" placeholder="Catégorie">
+
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <button ion-button color="primary" float-right 
+                (click)="insertCategorie()">Ajouter
+                    <ion-icon name="add"></ion-icon> 
+                </button>
+            </ion-item>
+    </ion-list>
+</ion-content>

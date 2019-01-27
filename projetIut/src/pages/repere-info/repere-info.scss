@@ -6,14 +6,16 @@ page-repere-info {
     
     #map {
         height: 50%;
+        width: 50%;
         margin: auto;
-        
+        float:left;
     }
 
     #photo{
         height: 50%;
         width: 50%;
         margin: auto;
+        float:right;
     }
 
 }

@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angula
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
+import { InsertCategoriePage } from '../pages/repere-info/insertCategorie';
 import { ReperesPage } from '../pages/reperes/reperes';
 import { RepereInfoPage } from '../pages/repere-info/repere-info';
 import { ParametrePage } from '../pages/parametre/parametre';
@@ -48,7 +49,8 @@ import { Insomnia } from '@ionic-native/insomnia';
     TabsPage,
     Audio,
     Photo,
-    PrisePhoto
+    PrisePhoto,
+    InsertCategoriePage
  
   ],
   imports: [
@@ -67,7 +69,8 @@ import { Insomnia } from '@ionic-native/insomnia';
     HomePage,
     TabsPage,
     Photo,
-    Audio
+    Audio,
+    InsertCategoriePage
   ],
   providers: [
     StatusBar,

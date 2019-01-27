@@ -1,6 +1,7 @@
 var opt_audio: boolean = false;
 var opt_photo: boolean = false;
 import { Component } from '@angular/core';
+import { SQLitePage } from '../home/SQLitePage';
 
 @Component({
   selector: 'page-parametre',
@@ -9,7 +10,9 @@ import { Component } from '@angular/core';
 
 export class ParametrePage {
 
-  constructor() {}
+  constructor(
+    private sqlCtrl : SQLitePage
+  ) {}
 
   getOpt_audio(){
     return opt_audio;
@@ -34,6 +37,10 @@ export class ParametrePage {
     } else {
       opt_audio = true;
     }
+  }
+
+  removeBase(){
+    this.sqlCtrl.supprimerBase();
   }
 
 }

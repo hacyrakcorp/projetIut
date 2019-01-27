@@ -35,7 +35,16 @@ export class ReperesPage {
        this.reperes = results;
       });
     });
+  }
 
+  ionViewDidEnter() {
+    this.platform.ready().then(() => {
+      this.sqliteCtrl.getAll('REPERES').then((results) => {
+        var data = JSON.stringify(results);
+       // this.reperes = JSON.parse(data);
+       this.reperes = results;
+      });
+    });
   }
 
   selectRepere(repere) {

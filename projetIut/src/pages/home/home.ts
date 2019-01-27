@@ -68,13 +68,13 @@ export class HomePage {
                 //Enregistrement photo
                 if (this.paramCtrl.getOpt_photo() == true){  
                   this.photoCtrl.photoshoot().then((base64) => {
-                    let array = [this.repereName,latitude,longitude,'',filePath,base64];
+                    let array = [this.repereName,latitude,longitude,filePath,base64];
                     this.sqliteCtrl.insert(TABLE_REPERES,array);
                     this.isenabled = true;
                   });
                   toast.present()
                 } else {
-                  let array = [this.repereName,latitude,longitude,'',filePath,''];
+                  let array = [this.repereName,latitude,longitude,filePath,''];
                   this.sqliteCtrl.insert(TABLE_REPERES,array);
                   this.isenabled = true;
                 } 
@@ -85,14 +85,15 @@ export class HomePage {
             if (this.paramCtrl.getOpt_photo() == true){
               //Enregistrement photo
               this.photoCtrl.photoshoot().then((base64) => {
-                let array = [this.repereName,latitude,longitude,'','',base64];
+                let array = [this.repereName,latitude,longitude,'',base64];
                 this.sqliteCtrl.insert(TABLE_REPERES,array); 
                 this.isenabled = true;
               });
             } else {
-                let array = [this.repereName,latitude,longitude,'','',''];
-                this.sqliteCtrl.insert(TABLE_REPERES,array);
-                this.isenabled = true;
+              alert('all false');
+              let array = [this.repereName,latitude,longitude,'',''];
+              this.sqliteCtrl.insert(TABLE_REPERES,array);
+              this.isenabled = true;
             }
 
           }  

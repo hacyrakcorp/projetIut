@@ -57,9 +57,10 @@ export class SQLitePage {
                 "latitude DOUBLE, "+
                 "longitude DOUBLE, "+
                 "photo TEXT, "+
-                "image BLOB, "+
                 "audio VARCHAR(250), "+
-                "commentaire VARCHAR(250)" +
+                "commentaire VARCHAR(250)," +
+                "date INTEGER," +
+                "categorie VARCHAR(32)" +
                 ")",[]
             ).then(() => {
                 console.log('Table Repères created !');
@@ -67,8 +68,37 @@ export class SQLitePage {
             })
             .catch(e => console.log(e)
             );
+            this.db.executeSql(
+                "CREATE TABLE IF NOT EXISTS CATEGORIES" +
+                "("+
+                "libelle VARCHAR(32) PRIMARY KEY NOT NULL UNIQUE"+
+                ")",[]
+            ).then(() => {
+                //this.testInsertCategorie();
+                console.log('Table Catégories created !');
+               // alert('Table Catégories crée');
+            })
+            .catch(e => console.log(e)
+            );
         });
     }
+
+    public insertCategorie($libelle:any[]){
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                "INSERT INTO CATEGORIES (libelle) "+
+                "VALUES (?)", $libelle
+            ).then(() => {
+                console.log('Insert réussi');
+               // alert('insert categorie ok');
+            }).catch(e => {
+                console.log(e)}
+            );
+        });
+    }
+
 
     public insert($table:string, $array:any[]) {
         this.sqlite.create(
@@ -76,11 +106,31 @@ export class SQLitePage {
         ).then(() => {
             this.db.executeSql(
                 'INSERT INTO '+
-                $table+' (name,latitude,longitude,image,audio,photo) '+
-                'VALUES (?,?,?,?,?,?)', $array
+                $table+' (name,latitude,longitude,audio,photo) '+
+                'VALUES (?,?,?,?,?)', $array
             ).then(() => {
                 console.log('Insert réussi');
-                //alert('insert ok');
+                alert('insert repere ok');
+            }).catch(e => {
+                console.log(e)}
+            );
+        });
+    }
+
+    public updateRepere($array:any[]) {
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                'UPDATE REPERES SET '+
+                'name = ?, '+
+                'latitude = ?, '+
+                'longitude = ? ,'+
+                'categorie = ? ,'+
+                'commentaire = ? '+
+                'WHERE idREPERES = ?', $array
+            ).then(() => {
+                console.log('Update réussi');
             }).catch(e => {
                 console.log(e)}
             );
@@ -102,15 +152,23 @@ export class SQLitePage {
                     //alert('select all ok ');
                     var dataSelectAll = [];
                     for (let i = 0; i < results.rows.length; i++) {
+                        if ($table == "REPERES"){
                             dataSelectAll.push({ 
                                 id : results.rows.item(i).idREPERES,
                                 name : results.rows.item(i).name,
                                 latitude : results.rows.item(i).latitude,
                                 longitude : results.rows.item(i).longitude,
                                 image : results.rows.item(i).photo,
-                                audio : results.rows.item(i).audio
+                                audio : results.rows.item(i).audio,
+                                categorie : results.rows.item(i).categorie,
+                                commentaire : results.rows.item(i).commentaire
                             });
-                           // alert(results.rows.item(i).audio);
+                        } else if ($table == "CATEGORIES") {
+                            dataSelectAll.push({ 
+                                libelle : results.rows.item(i).libelle
+                            });
+                        }
+                          
                     }
                     resolve(dataSelectAll);
                     }
@@ -123,6 +181,11 @@ export class SQLitePage {
             
         //});
      //   return dataSelectAll;
+    }
+
+    public supprimerBase() {
+        this.sqlite.deleteDatabase(this.options);
+        alert('supp');
     }
 
 }

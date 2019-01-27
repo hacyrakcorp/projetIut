@@ -1,10 +1,10 @@
 import { Component  } from '@angular/core';
-import { IonicPage, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavParams, NavController, Platform } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 import { Audio } from '../home/priseaudio';
 import { AffichageMap } from './googleMap';
-import { blobToBase64String  } from 'blob-util';
-
+import { SQLitePage } from '../home/SQLitePage';
+import { InsertCategoriePage } from './insertCategorie';
 //Test param car console.log ne fonctionne pas
 import { AlertController } from 'ionic-angular';
 
@@ -24,13 +24,17 @@ export class RepereInfoPage {
   repere;
   base64data;
   playing: boolean = false;
-
+  categories;
+  categorie:string='';
+  commentaire:string='';
   constructor(public viewCtrl: ViewController, 
     public navParams: NavParams,
+    public navCtrl : NavController,
     public platform : Platform,
     private alertCtrl: AlertController,
     private audioCtrl : Audio,
-    private carteCtrl : AffichageMap
+    private carteCtrl : AffichageMap,
+    private sqliteCtrl : SQLitePage
     ) {
         let rep = navParams.get('repere');
 
@@ -40,6 +44,8 @@ export class RepereInfoPage {
       this.longitude = rep.longitude;
       this.audio = rep.audio;
       this.image = rep.image;
+      this.categorie = rep.categorie;
+      this.commentaire = rep.commentaire;
       
       let derniereSeparation = this.audio.lastIndexOf('/');
       this.audioName = this.audio.substring(derniereSeparation+1,this.audio.length).toLowerCase();
@@ -52,12 +58,29 @@ export class RepereInfoPage {
         image: this.image
       };
   }
+  
+  ionViewWillEnter() {
+    this.platform.ready().then(() => {
+      this.sqliteCtrl.getAll('CATEGORIES').then((results) => {
+        this.categories = JSON.parse(JSON.stringify(results));
+      });
+    });
+  }
+
+  ionViewDidEnter(){
+    this.platform.ready().then(() => {
+      this.sqliteCtrl.getAll('CATEGORIES').then((results) => {
+        this.categories = JSON.parse(JSON.stringify(results));
+      });
+    });
+  }
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
       this.carteCtrl.loadMap(this.repere);
+      
   });
-    console.log('ionViewDidLoad RepereInfoPage');
+  
   }
 
   ionViewWillLeave() {
@@ -77,19 +100,24 @@ export class RepereInfoPage {
   }
 
   enregistrer() {
-    let modifierRepere = {
-      id: this.id,
-      nom: this.nom,
-      latitude: this.latitude,
-      longitude: this.longitude
-    };
-   
-    if (JSON.stringify(modifierRepere) !== JSON.stringify(this.repere)){
-      this.viewCtrl.dismiss(modifierRepere);
-    } else {
-      this.viewCtrl.dismiss();
-    }
+    let upRepere = [
+      this.nom,
+      this.latitude,
+      this.longitude,
+      this.categorie,
+      this.commentaire,
+      this.id
+    ];
+   this.sqliteCtrl.updateRepere(upRepere);
+   this.navCtrl.pop();
     
+  }
+  insertCategorie(){
+    this.navCtrl.push(InsertCategoriePage);
+  }
+
+  modifierCategorie(value){
+    this.categorie = value;
   }
 
   
