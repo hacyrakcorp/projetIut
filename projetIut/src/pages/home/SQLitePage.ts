@@ -133,7 +133,7 @@ export class SQLitePage {
                 'VALUES (?,?,?,?,?)', $array
             ).then(() => {
                 console.log('Insert réussi');
-                alert('insert repere ok');
+                //alert('insert repere ok');
             }).catch(e => {
                 console.log(e)}
             );

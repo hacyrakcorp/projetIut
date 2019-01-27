@@ -45,9 +45,16 @@ export class HomePage {
       var longitude : any;
       const TABLE_REPERES : string = 'REPERES';
       this.isenabled=false;
+      const repereOK = this.toastCtrl.create({
+        message: "Enregistrement du point d'intérêt",
+        duration: 3000,
+        position : $position
+    });
 
       //Enregistrement GPS
-      this.GPSCtrl.getLatitudeLongitude().then((coordonnees) =>{
+      this.GPSCtrl.getLatitudeLongitude(
+
+      ).then((coordonnees) =>{
         let data = JSON.parse(JSON.stringify(coordonnees));
         latitude = data.latitude;
         longitude = data.longitude;
@@ -55,49 +62,46 @@ export class HomePage {
 
           //Enregistrement Audio
          if (this.paramCtrl.getOpt_audio() == true){
-            
             let filePath = this.audioCtrl.startRecord();
             let TIME_IN_MS = 5000;
             setTimeout( () => {  //Attendre 5 secondes et stop record
                 this.audioCtrl.stopRecord();
-                const toast = this.toastCtrl.create({
-                    message: "fin record",
-                    duration: 3000,
-                    position : $position
-                });
                 //Enregistrement photo
                 if (this.paramCtrl.getOpt_photo() == true){  
-                  this.photoCtrl.photoshoot().then((base64) => {
+                  this.photoCtrl.photoshoot(
+
+                  ).then((base64) => {
                     let array = [this.repereName,latitude,longitude,filePath,base64];
                     this.sqliteCtrl.insert(TABLE_REPERES,array);
                     this.isenabled = true;
-                  });
-                  toast.present()
+                    repereOK.present();
+                  }).catch(err=>this.isenabled = true);
                 } else {
                   let array = [this.repereName,latitude,longitude,filePath,''];
                   this.sqliteCtrl.insert(TABLE_REPERES,array);
                   this.isenabled = true;
+                  repereOK.present();
                 } 
             }, TIME_IN_MS);
           } else { // Pas d'enregistrement audio
-            //
-          //  alert('audio false');
             if (this.paramCtrl.getOpt_photo() == true){
               //Enregistrement photo
-              this.photoCtrl.photoshoot().then((base64) => {
+              this.photoCtrl.photoshoot(
+
+              ).then((base64) => {
                 let array = [this.repereName,latitude,longitude,'',base64];
                 this.sqliteCtrl.insert(TABLE_REPERES,array); 
                 this.isenabled = true;
-              });
+                repereOK.present();
+              }).catch(err=>this.isenabled = true);
             } else {
-              alert('all false');
               let array = [this.repereName,latitude,longitude,'',''];
               this.sqliteCtrl.insert(TABLE_REPERES,array);
               this.isenabled = true;
+              repereOK.present();
             }
-
           }  
-      });
+      }).catch(err=> this.isenabled = true);
     });
   }
 
