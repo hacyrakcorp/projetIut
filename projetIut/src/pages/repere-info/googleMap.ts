@@ -15,7 +15,7 @@ export class AffichageMap {
     ) {
   }
 
-  loadMap(repere) {
+  loadMap(repere='') {
     // create a new map by passing HTMLElement
     let element: HTMLElement = document.getElementById('map');
     //alert(element);
@@ -30,6 +30,8 @@ export class AffichageMap {
         // Now you can add elements to the map like the marker
       }
     );
+
+    /*
 
     // create LatLng object
     let ionic: LatLng = new LatLng(repere.latitude,repere.longitude);
@@ -53,7 +55,7 @@ export class AffichageMap {
     map.addMarker(markerOptions)
     .then((marker: Marker) => {
         marker.showInfoWindow();
-    });
+    });*/
   }
 
 }

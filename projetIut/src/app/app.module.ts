@@ -10,6 +10,7 @@ import { RepereInfoPage } from '../pages/repere-info/repere-info';
 import { ParametrePage } from '../pages/parametre/parametre';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { CartePage } from '../pages/reperes/carte';
 
 import { PrisePhoto } from '../pages/home/prisePhoto';
 import { Photo } from '../pages/home/takephoto';
@@ -43,6 +44,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     MyApp,
     AboutPage,
     ReperesPage,
+    CartePage,
 	RepereInfoPage,
     ParametrePage,
     HomePage,
@@ -64,6 +66,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     MyApp,
     AboutPage,
     ReperesPage,
+    CartePage,
 	RepereInfoPage,
     ParametrePage,
     HomePage,

@@ -3,7 +3,7 @@ import { NavController, Platform } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { RepereInfoPage } from '../repere-info/repere-info';
 import { ToastController } from 'ionic-angular';
-
+import { CartePage } from './carte';
  //Test param car console.log ne fonctionne pas
  import { AlertController } from 'ionic-angular';
  import { SQLitePage } from '../home/SQLitePage';
@@ -89,6 +89,10 @@ export class ReperesPage {
        // this.reperes = JSON.parse(data);
        this.reperes = results;
       });
+  }
+
+  carte(){
+    this.navCtrl.push(CartePage);
   }
 
 }
