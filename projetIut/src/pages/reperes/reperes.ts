@@ -19,12 +19,15 @@ export class ReperesPage {
     {id:3,nom:"Repere3",latitude:46.6723861,longitude:4.56}
   ];*/
   reperes;
+  order:string='';
+
   constructor(public navCtrl: NavController, 
     public modalCtrl : ModalController,
     public toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private sqliteCtrl : SQLitePage, public platform : Platform) {
-   
+    
+    this.order="name";
   }
   
   ionViewWillEnter() {
@@ -77,6 +80,15 @@ export class ReperesPage {
        }
      });
 	  modal.present();*/
+  }
+
+  trier(value){
+    this.order = value;
+     this.sqliteCtrl.getAll('REPERES',this.order).then((results) => {
+        var data = JSON.stringify(results);
+       // this.reperes = JSON.parse(data);
+       this.reperes = results;
+      });
   }
 
 }

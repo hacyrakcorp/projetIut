@@ -59,7 +59,7 @@ export class SQLitePage {
                 "photo TEXT, "+
                 "audio VARCHAR(250), "+
                 "commentaire VARCHAR(250)," +
-                "date INTEGER," +
+                "date TEXT," +
                 "categorie VARCHAR(32)" +
                 ")",[]
             ).then(() => {
@@ -121,8 +121,8 @@ export class SQLitePage {
         ).then(() => {
             this.db.executeSql(
                 'INSERT INTO '+
-                $table+' (name,latitude,longitude,audio,photo) '+
-                'VALUES (?,?,?,?,?)', $array
+                $table+' (name,latitude,longitude,audio,photo,date) '+
+                'VALUES (?,?,?,?,?,datetime("now"))', $array
             ).then(() => {
                 console.log('Insert réussi');
                 //alert('insert repere ok');
@@ -152,16 +152,19 @@ export class SQLitePage {
         });
     }
     
-    public getAll($table) {
+    public getAll($table,$trier='') {
         
         //this.sqlite.create(
         //    this.options
         //).then(() => {
             return new Promise((resolve) =>
             {
-                this.db.executeSql(
-                    'SELECT * '+
-                    'FROM '+ $table, []
+                let sql = 'SELECT * '+ 'FROM '+ $table;
+                if($trier != ''){
+                    sql = sql + ' ORDER BY ' +$trier;
+                }
+                this.db.executeSql(     
+                    sql, []
                 ).then((results) => {
                     console.log('Select all ok');
                     //alert('select all ok ');
