@@ -120,5 +120,10 @@ export class RepereInfoPage {
     this.categorie = value;
   }
 
+  supprimer(){
+    this.sqliteCtrl.deleteRepere(this.id);
+    this.navCtrl.pop();
+  }
+
   
 }

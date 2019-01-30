@@ -114,6 +114,20 @@ export class SQLitePage {
         });
     }
 
+    public deleteRepere($id){
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                "DELETE FROM REPERES "+
+                "WHERE idREPERES = '"+ $id+"'"
+            ).then(() => {
+                
+            }).catch(e => {
+                console.log(e)}
+            );  
+        });
+    }
 
     public insert($table:string, $array:any[]) {
         this.sqlite.create(
