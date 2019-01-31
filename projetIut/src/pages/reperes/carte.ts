@@ -13,16 +13,23 @@ import { RepereInfoPage } from '../repere-info/repere-info';
 })
 
 export class CartePage {
+
+	repere;
 	constructor(
 		private carteCtrl : AffichageMap,
 		public platform : Platform
 		){
-
+			this.repere = {
+				
+				nom: 'test' ,
+				latitude: 43,
+				longitude: 5
+			  };
 	}
 
 	ionViewDidLoad() {
     	this.platform.ready().then(() => {
-     	this.carteCtrl.loadMap();
+     	this.carteCtrl.loadMap(this.repere);
   	});
   
   }

@@ -52,8 +52,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     Audio,
     Photo,
     PrisePhoto,
-    InsertCategoriePage
- 
+    InsertCategoriePage,
   ],
   imports: [
     BrowserModule,

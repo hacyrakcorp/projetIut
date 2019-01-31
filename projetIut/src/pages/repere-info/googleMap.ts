@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, CameraPosition, MarkerOptions, Marker } from '@ionic-native/google-maps';
+import { GoogleMaps, GoogleMap, GoogleMapsEvent, LatLng, CameraPosition, MarkerOptions, Marker, GoogleMapOptions } from '@ionic-native/google-maps';
 
-
+var google;
 @Component({
   selector: 'page-repere-info',
   templateUrl: 'repere-info.html'
@@ -15,11 +15,16 @@ export class AffichageMap {
     ) {
   }
 
-  loadMap(repere='') {
+  loadMap(repere) {
     // create a new map by passing HTMLElement
     let element: HTMLElement = document.getElementById('map');
     //alert(element);
+  /*  let mapOption: GoogleMapOptions = {
+      mapTypeId: google.maps.MapTypeId.HYBRID 
+    }*/
+   // let map: GoogleMap = this.googleMaps.create(element,mapOption);
     let map: GoogleMap = this.googleMaps.create(element);
+
     //alert(map);
     // listen to MAP_READY event
     // You must wait for this event to fire before adding something to the map or modifying it in anyway
@@ -31,7 +36,7 @@ export class AffichageMap {
       }
     );
 
-    /*
+    
 
     // create LatLng object
     let ionic: LatLng = new LatLng(repere.latitude,repere.longitude);
@@ -55,7 +60,7 @@ export class AffichageMap {
     map.addMarker(markerOptions)
     .then((marker: Marker) => {
         marker.showInfoWindow();
-    });*/
+    });
   }
 
 }

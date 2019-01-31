@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, Toast } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { GlobalServiceProvider } from '../../providers/global-service/global-service';
 
 import { ParametrePage } from '../parametre/parametre';
 import { SQLitePage } from './SQLitePage';
+
 
 import { Photo } from './takephoto';
 import { Audio } from './priseaudio';
@@ -29,9 +30,6 @@ export class HomePage {
     private GPSCtrl : GPS,
     private paramCtrl : ParametrePage
     ) { 
-
-      
-      
     }
 
   
@@ -49,7 +47,7 @@ export class HomePage {
         message: "Enregistrement du point d'intérêt",
         duration: 3000,
         position : $position
-    });
+      });
 
       //Enregistrement GPS
       this.GPSCtrl.getLatitudeLongitude(
@@ -101,7 +99,17 @@ export class HomePage {
               repereOK.present();
             }
           }  
-      }).catch(err=> this.isenabled = true);
+      }).catch(err=> {this.isenabled = true
+        const repereKO = this.toastCtrl.create({
+          message: "Erreur enregistrement. Activez la géolocalisation.",
+          duration: 3000,
+          position : $position
+        });
+        repereKO.present();
+      });
+    }).catch((err)=> {
+      this.isenabled = true;
+      
     });
   }
 

@@ -26,18 +26,18 @@ export class GPS {
   }*/
 
   getLatitudeLongitude(){
-     return new Promise ((resolve) =>
+     return new Promise ((resolve, reject) =>
     {
         var latitude;
         var longitude;
         //this.platform.ready().then(() => {
             this.geo.getCurrentPosition(
-              {timeout: 30000,enableHighAccuracy: false, maximumAge:0}
+              {timeout: 10000,enableHighAccuracy: true, maximumAge:0}
             ).then((resp) => {
               latitude = resp.coords.latitude;
               longitude = resp.coords.longitude;
               resolve({latitude,longitude});
-           }).catch((e)=> {alert(e.message)});
+           }).catch((e)=> {reject(e.message)});
        // });
     });
   }

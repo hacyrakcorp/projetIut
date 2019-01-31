@@ -24,7 +24,7 @@
     "@ionic-native/base64-to-gallery": "^4.17.0",
     "@ionic-native/camera": "^4.17.0",
     "@ionic-native/camera-preview": "^4.17.0",
-    "@ionic-native/core": "~4.15.0",
+    "@ionic-native/core": "^4.11.0",
     "@ionic-native/file": "^4.19.0",
     "@ionic-native/geolocation": "^4.19.0",
     "@ionic-native/google-maps": "^4.15.1",
