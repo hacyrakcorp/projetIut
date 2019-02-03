@@ -6,7 +6,7 @@ import { AffichageMap } from './googleMap';
 import { SQLitePage } from '../home/SQLitePage';
 import { InsertCategoriePage } from './insertCategorie';
 //Test param car console.log ne fonctionne pas
-import { AlertController } from 'ionic-angular';
+//import { AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -27,11 +27,11 @@ export class RepereInfoPage {
   categories;
   categorie:string='';
   commentaire:string='';
+  typeMapRoad:boolean=true;
   constructor(public viewCtrl: ViewController, 
     public navParams: NavParams,
     public navCtrl : NavController,
     public platform : Platform,
-    private alertCtrl: AlertController,
     private audioCtrl : Audio,
     private carteCtrl : AffichageMap,
     private sqliteCtrl : SQLitePage
@@ -77,10 +77,12 @@ export class RepereInfoPage {
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
-      this.carteCtrl.loadMap(this.repere);
-      
-  });
-  
+      if (this.typeMapRoad){
+        this.carteCtrl.loadMap(this.repere,'road');
+      } else {
+        this.carteCtrl.loadMap(this.repere,'satellite');
+      }
+    });
   }
 
   ionViewWillLeave() {
@@ -123,6 +125,15 @@ export class RepereInfoPage {
   supprimer(){
     this.sqliteCtrl.deleteRepere(this.id);
     this.navCtrl.pop();
+  }
+
+  changementMap(){
+    if (this.typeMapRoad){
+      this.typeMapRoad = false;
+    } else {
+      this.typeMapRoad = true;
+    }
+    this.carteCtrl.changementTypeMap(this.typeMapRoad);
   }
 
   

@@ -5,7 +5,7 @@ import { RepereInfoPage } from '../repere-info/repere-info';
 import { ToastController } from 'ionic-angular';
 import { CartePage } from './carte';
  //Test param car console.log ne fonctionne pas
- import { AlertController } from 'ionic-angular';
+ //import { AlertController } from 'ionic-angular';
  import { SQLitePage } from '../home/SQLitePage';
 
 @Component({
@@ -24,7 +24,7 @@ export class ReperesPage {
   constructor(public navCtrl: NavController, 
     public modalCtrl : ModalController,
     public toastCtrl: ToastController,
-    private alertCtrl: AlertController,
+   // private alertCtrl: AlertController,
     private sqliteCtrl : SQLitePage, public platform : Platform) {
     
     this.order="name";
@@ -33,7 +33,7 @@ export class ReperesPage {
   ionViewWillEnter() {
     this.platform.ready().then(() => {
       this.sqliteCtrl.getAll('REPERES').then((results) => {
-        var data = JSON.stringify(results);
+       // var data = JSON.stringify(results);
        // this.reperes = JSON.parse(data);
        this.reperes = results;
       });
@@ -43,7 +43,7 @@ export class ReperesPage {
   ionViewDidEnter() {
     this.platform.ready().then(() => {
       this.sqliteCtrl.getAll('REPERES').then((results) => {
-        var data = JSON.stringify(results);
+       // var data = JSON.stringify(results);
        // this.reperes = JSON.parse(data);
        this.reperes = results;
       });
@@ -85,7 +85,7 @@ export class ReperesPage {
   trier(value){
     this.order = value;
      this.sqliteCtrl.getAll('REPERES',this.order).then((results) => {
-        var data = JSON.stringify(results);
+      //  var data = JSON.stringify(results);
        // this.reperes = JSON.parse(data);
        this.reperes = results;
       });

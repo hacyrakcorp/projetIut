@@ -10,6 +10,10 @@ page-repere-info {
         margin: auto;
         float:left;
     }
+    .btn-map{
+        float:left;
+        width: 50%;
+    }
 
     #photo{
         height: 50%;
@@ -18,5 +22,11 @@ page-repere-info {
         float:right;
     }
 
-
+    #categorie{
+        float:left;
+        width: 80%;
+    }
+    #btn-cat{
+        float:right;
+    }
 }

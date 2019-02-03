@@ -193,7 +193,8 @@ export class SQLitePage {
                                 image : results.rows.item(i).photo,
                                 audio : results.rows.item(i).audio,
                                 categorie : results.rows.item(i).categorie,
-                                commentaire : results.rows.item(i).commentaire
+                                commentaire : results.rows.item(i).commentaire,
+                                date : results.rows.item(i).date
                             });
                         } else if ($table == "CATEGORIES") {
                             dataSelectAll.push({ 

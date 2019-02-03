@@ -29,7 +29,7 @@ export class CartePage {
 
 	ionViewDidLoad() {
     	this.platform.ready().then(() => {
-     	this.carteCtrl.loadMap(this.repere);
+     	this.carteCtrl.loadMap(this.repere,'road');
   	});
   
   }

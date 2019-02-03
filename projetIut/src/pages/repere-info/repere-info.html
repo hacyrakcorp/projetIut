@@ -17,73 +17,61 @@
 
 
 <ion-content>
-
-    <img id="photo" [src]="image" alt="Image" />
-    <div #map id="map"></div>
-    <ion-list>
-      <ion-item id="categorie">
-        <ion-label>Catégorie</ion-label>
-        <ion-select 
-         placeholder="Select One" (ionChange)=modifierCategorie($event)>
-         <ion-option value="null">
-              Pas de catégorie
-          </ion-option>
-         <ion-option *ngFor="let cat of categories" 
-         value="{{cat.libelle}}"
-         [selected]="categorie == cat.libelle"
-         >
-              {{cat.libelle}}
-          </ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item id='btn-cat'>
-        <button end ion-button icon-only color="primary" float-right (click)="insertCategorie()">
-          <ion-icon name="add"></ion-icon> 
-        </button>
-      </ion-item>
-    </ion-list>
-     
-  <ion-item>
-    <ion-label color="primary" fixed>Nom</ion-label>
-    <ion-input type="nom" [(ngModel)]="nom" placeholder="Nom du repère"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label color="primary" fixed>Latitude</ion-label>
-    <ion-input type="latitude" [(ngModel)]="latitude" placeholder="Latitude"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label color="primary" fixed>Longitude</ion-label>
-    <ion-input type="longitude" [(ngModel)]="longitude" placeholder="Longitude"></ion-input>
-  </ion-item>
-  <ion-item *ngIf="audio != ''"> 
-    <ion-label color="primary" fixed>Audio</ion-label>
-    <button ion-button item-content (click)="play(audio)" *ngIf="!playing">
-        <ion-icon name="play"></ion-icon>
+  
+  
+  <div #map id="map"></div>
+  <img id="photo" [src]="image" alt="Image" />
+  <button class="btn-map" ion-button color="primary" *ngIf="typeMapRoad" (click)=changementMap()>
+    Vue satellite
+  </button>
+  <button class="btn-map" ion-button color="primary" *ngIf="!typeMapRoad" (click)=changementMap()>
+    Vue carte
+  </button>
+  <ion-list>
+    <ion-item id = "categorie">
+      <ion-label color="primary" fixed >Catégorie</ion-label>
+      <ion-select placeholder="Select One" (ionChange)=modifierCategorie($event)>
+        <ion-option value="null">
+          Pas de catégorie
+        </ion-option>
+        <ion-option *ngFor="let cat of categories" 
+          value="{{cat.libelle}}"
+          [selected]="categorie == cat.libelle"
+        >
+          {{cat.libelle}}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <button id='btn-cat' end ion-button icon-only color="primary" (click)="insertCategorie()">
+      <ion-icon name="add"></ion-icon> 
     </button>
-    <button ion-button item-content (click)="stop()" *ngIf="playing">
-        <ion-icon name="square"></ion-icon>
-    </button>
-    <p item-end>{{audioName}}</p>
-  </ion-item>
-  <ion-item>
-      <ion-label stacked>Commentaire</ion-label>
+    <ion-item>
+      <ion-label color="primary" fixed>Nom</ion-label>
+      <ion-input type="nom" [(ngModel)]="nom" placeholder="Nom du repère"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" fixed>Latitude</ion-label>
+      <ion-input type="latitude" [(ngModel)]="latitude" placeholder="Latitude"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" fixed>Longitude</ion-label>
+      <ion-input type="longitude" [(ngModel)]="longitude" placeholder="Longitude"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="audio != ''"> 
+      <ion-label color="primary" fixed>Audio</ion-label>
+      <button ion-button item-content (click)="play(audio)" *ngIf="!playing">
+          <ion-icon name="play"></ion-icon>
+      </button>
+      <button ion-button item-content (click)="stop()" *ngIf="playing">
+          <ion-icon name="square"></ion-icon>
+      </button>
+      <p item-end>{{audioName}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" fixed >Commentaire</ion-label>
       <ion-textarea [(ngModel)]="commentaire" rows="10" maxlength="250"></ion-textarea>
     </ion-item>
-  <!--
-  <label class = "item item-input item-select">
-      <div class = "input-label">
-         Select
-      </div>
-      <select>
-         <option>Option 1</option>
-         <option selected>Option 2</option>
-         <option>Option 3</option>
-      </select>
-   </label>-->
-</ion-content>
+  </ion-list>
+  <button ion-button full (click)="enregistrer()">Enregistrer</button>
 
-<ion-footer>
-  <ion-toolbar>
-    <button ion-button full (click)="enregistrer()">Enregistrer</button>
-  </ion-toolbar>
-</ion-footer>
+</ion-content>
