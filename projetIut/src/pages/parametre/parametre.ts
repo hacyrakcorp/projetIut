@@ -1,5 +1,6 @@
 var opt_audio: boolean = false;
-var opt_photo: boolean = false;
+var opt_photo: boolean = true;
+
 import { Component } from '@angular/core';
 import { SQLitePage } from '../home/SQLitePage';
 

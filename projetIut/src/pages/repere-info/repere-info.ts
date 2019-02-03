@@ -14,30 +14,31 @@ import { InsertCategoriePage } from './insertCategorie';
   templateUrl: 'repere-info.html',
 })
 export class RepereInfoPage {
-  id: string;
-  nom: string = '';
-  latitude: string = '';
-  longitude: string = '';
-  audio:string = '';
-  audioName: string = '';
-  image : Blob;
+  playing:    boolean = false;
+  typeMapRoad:boolean = true;
+  id:         string;
+  nom:        string = '';
+  latitude:   string = '';
+  longitude:  string = '';
+  audio:      string = '';
+  audioName:  string = '';
+  categorie:  string = '';
+  commentaire:string = '';
+  image :     Blob;
   repere;
-  base64data;
-  playing: boolean = false;
   categories;
-  categorie:string='';
-  commentaire:string='';
-  typeMapRoad:boolean=true;
-  constructor(public viewCtrl: ViewController, 
-    public navParams: NavParams,
-    public navCtrl : NavController,
-    public platform : Platform,
-    private audioCtrl : Audio,
-    private carteCtrl : AffichageMap,
-    private sqliteCtrl : SQLitePage
+  base64data;
+  
+  constructor(
+    public    viewCtrl : ViewController, 
+    public    navParams : NavParams,
+    public    navCtrl : NavController,
+    public    platform : Platform,
+    private   audioCtrl : Audio,
+    private   carteCtrl : AffichageMap,
+    private   sqliteCtrl : SQLitePage
     ) {
-        let rep = navParams.get('repere');
-
+      let rep = navParams.get('repere');
       this.id = rep.id;
       this.nom = rep.name;
       this.latitude = rep.latitude;
@@ -77,11 +78,9 @@ export class RepereInfoPage {
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
-      if (this.typeMapRoad){
-        this.carteCtrl.loadMap(this.repere,'road');
-      } else {
-        this.carteCtrl.loadMap(this.repere,'satellite');
-      }
+     
+        this.carteCtrl.loadMap(this.repere);
+    
     });
   }
 
@@ -91,7 +90,6 @@ export class RepereInfoPage {
   }
 
   play(file){
-    //alert(file);
     this.audioCtrl.playAudio(file,'');
     this.playing = true;
   }

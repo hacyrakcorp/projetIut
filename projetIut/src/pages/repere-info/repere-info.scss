@@ -5,28 +5,27 @@
 page-repere-info {
     
     #map {
-        height: 50%;
-        width: 50%;
-        margin: auto;
-        float:left;
+        height:     50%;
+        width:      50%;
+        float:      left;
     }
+
     .btn-map{
-        float:left;
-        width: 50%;
+        width:      50%;
     }
 
     #photo{
-        height: 50%;
-        width: 50%;
-        margin: auto;
-        float:right;
+        height:     50%;
+        width:      50%;
+        margin:     auto;
+        float:      right;
     }
 
     #categorie{
-        float:left;
-        width: 80%;
+        float:      left;
+        width:      80%;
     }
     #btn-cat{
-        float:right;
+        float:      right;
     }
 }
