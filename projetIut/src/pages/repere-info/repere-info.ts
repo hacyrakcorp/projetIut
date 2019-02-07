@@ -47,7 +47,6 @@ export class RepereInfoPage {
       this.image = rep.image;
       this.categorie = rep.categorie;
       this.commentaire = rep.commentaire;
-      
       let derniereSeparation = this.audio.lastIndexOf('/');
       this.audioName = this.audio.substring(derniereSeparation+1,this.audio.length).toLowerCase();
       this.repere = {
@@ -58,6 +57,7 @@ export class RepereInfoPage {
         audio: this.audio,
         image: this.image
       };
+      alert(this.repere.nom + this.repere.id);
   }
   
   ionViewWillEnter() {
@@ -78,9 +78,7 @@ export class RepereInfoPage {
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
-     
         this.carteCtrl.loadMap(this.repere);
-    
     });
   }
 
