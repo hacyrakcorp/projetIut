@@ -24,7 +24,6 @@ export class AffichageMap {
     // create a new map by passing HTMLElement
     let element: HTMLElement = document.getElementById('map');
     this.map = this.googleMaps.create(element);
-    alert('load');
     // listen to MAP_READY event
     this.map.one(
       GoogleMapsEvent.MAP_READY

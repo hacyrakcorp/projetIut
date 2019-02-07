@@ -57,7 +57,6 @@ export class RepereInfoPage {
         audio: this.audio,
         image: this.image
       };
-      alert(this.repere.nom + this.repere.id);
   }
   
   ionViewWillEnter() {
