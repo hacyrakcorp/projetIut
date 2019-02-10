@@ -4,8 +4,6 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent,
   LatLng, CameraPosition, MarkerOptions, Marker,
   GoogleMapsMapTypeId } from '@ionic-native/google-maps';
 
-import { SQLitePage } from '../home/SQLitePage';
-
 @Component({
   selector: 'page-repere-info',
   templateUrl: 'repere-info.html'
@@ -15,13 +13,13 @@ export class AffichageMap {
   lng: any;
   map: GoogleMap;
   constructor(
-    private   googleMaps  : GoogleMaps,
-    private   sqlCtrl     : SQLitePage
+    private   googleMaps  : GoogleMaps
     ) {
   }
 
   loadMap(repere) {
     // create a new map by passing HTMLElement
+    return new Promise((resolve) => {
     let element: HTMLElement = document.getElementById('map');
     this.map = this.googleMaps.create(element);
     // listen to MAP_READY event
@@ -50,9 +48,17 @@ export class AffichageMap {
       this.map.addMarker(markerOptions)
         .then((marker: Marker) => {
             marker.showInfoWindow();
+            
+              marker.addEventListener(GoogleMapsEvent.MARKER_DRAG_END)
+              .subscribe(() => {
+                repere.latitude = marker.getPosition().lat;
+                repere.longitude = marker.getPosition().lng;
+                resolve(repere);
+              });
         });
         
     });
+  });
 
   }
 

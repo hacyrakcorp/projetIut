@@ -13,7 +13,9 @@ export class ParametrePage {
 
   constructor(
     private sqlCtrl : SQLitePage
-  ) {}
+  ) {
+    opt_photo=true;
+  }
 
   getOpt_audio(){
     return opt_audio;

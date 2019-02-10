@@ -2,9 +2,12 @@ import { Component  } from '@angular/core';
 import { IonicPage, NavParams, NavController, Platform } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 import { Audio } from '../home/priseaudio';
-import { AffichageMap } from './googleMap';
+//import { AffichageMap } from './googleMap';
 import { SQLitePage } from '../home/SQLitePage';
 import { InsertCategoriePage } from './insertCategorie';
+import { GoogleMaps, GoogleMap, GoogleMapsEvent, 
+  LatLng, CameraPosition, MarkerOptions, Marker,
+  GoogleMapsMapTypeId } from '@ionic-native/google-maps';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
 
@@ -25,9 +28,10 @@ export class RepereInfoPage {
   categorie:  string = '';
   commentaire:string = '';
   image :     Blob;
-  repere;
+  //repere;
   categories;
-  base64data;
+  //base64data;
+  map: GoogleMap;
   
   constructor(
     public    viewCtrl : ViewController, 
@@ -35,8 +39,9 @@ export class RepereInfoPage {
     public    navCtrl : NavController,
     public    platform : Platform,
     private   audioCtrl : Audio,
-    private   carteCtrl : AffichageMap,
-    private   sqliteCtrl : SQLitePage
+   // private   carteCtrl : AffichageMap,
+    private   sqliteCtrl : SQLitePage,
+    private   googleMaps  : GoogleMaps
     ) {
       let rep = navParams.get('repere');
       this.id = rep.id;
@@ -49,14 +54,14 @@ export class RepereInfoPage {
       this.commentaire = rep.commentaire;
       let derniereSeparation = this.audio.lastIndexOf('/');
       this.audioName = this.audio.substring(derniereSeparation+1,this.audio.length).toLowerCase();
-      this.repere = {
+      /*this.repere = {
         id: this.id,
         nom: this.nom ,
         latitude: this.latitude,
         longitude: this.longitude,
         audio: this.audio,
         image: this.image
-      };
+      };*/
   }
   
   ionViewWillEnter() {
@@ -77,7 +82,12 @@ export class RepereInfoPage {
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
-        this.carteCtrl.loadMap(this.repere);
+      this.loadMap();
+       /* this.carteCtrl.loadMap(this.repere).then((result)=>{
+         // alert(result);
+          this.latitude = JSON.parse(JSON.stringify(result)).latitude;
+          this.longitude = JSON.parse(JSON.stringify(result)).longitude;
+        })*/
     });
   }
 
@@ -128,7 +138,62 @@ export class RepereInfoPage {
     } else {
       this.typeMapRoad = true;
     }
-    this.carteCtrl.changementTypeMap(this.typeMapRoad);
+    //this.carteCtrl.changementTypeMap(this.typeMapRoad);
+    this.changementTypeMap(this.typeMapRoad);
+  }
+
+  private loadMap() {
+    // create a new map by passing HTMLElement
+    let element: HTMLElement = document.getElementById('map');
+    this.map = this.googleMaps.create(element);
+    // listen to MAP_READY event
+    this.map.one(
+      GoogleMapsEvent.MAP_READY
+    ).then(() => {
+      // create LatLng object
+      let latlng: LatLng = new LatLng(parseFloat(this.latitude),parseFloat(this.longitude));
+      // create CameraPosition
+      let position: CameraPosition<LatLng> = {
+        target: latlng,
+        zoom: 17,
+        tilt: 30
+      };
+      // move the map's camera to position
+      this.map.moveCamera(position);
+      this.ajouterMarker(latlng);
+    });
+  }
+
+  private ajouterMarker(latlng:LatLng){
+      // create new marker
+      let markerOptions: MarkerOptions = {
+        icon:'blue',
+        position: latlng,
+        title: this.nom,
+        draggable:true
+      };
+      //Marker repositionnable
+      let marker = this.map.addMarkerSync(markerOptions);
+      marker.showInfoWindow();
+      marker.on(GoogleMapsEvent.MARKER_DRAG_END)
+        .subscribe(() => {    
+          this.latitude = marker.getPosition().lat.toString();
+          this.longitude = marker.getPosition().lng.toString();
+          document.getElementById('lat').innerHTML = this.latitude;
+          document.getElementById('lng').innerHTML = this.longitude;
+        });
+  }
+  private test(){
+
+  }
+
+
+  private changementTypeMap(typeMapRoad){
+    if(typeMapRoad){
+      this.map.setMapTypeId(GoogleMapsMapTypeId.ROADMAP);
+    } else {
+      this.map.setMapTypeId(GoogleMapsMapTypeId.SATELLITE);
+    }
   }
 
   

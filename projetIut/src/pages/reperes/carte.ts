@@ -71,10 +71,9 @@ export class CartePage {
       
       // create new marker
       let markerOptions: MarkerOptions = {
+        icon:'blue',
         position: latlng,
-        title: repere.name,
-        draggable:true,
-        id:repere
+        title: repere.name
       };
       this.map.addMarker(markerOptions)
         .then((marker: Marker) => {
