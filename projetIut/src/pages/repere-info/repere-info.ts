@@ -2,7 +2,6 @@ import { Component  } from '@angular/core';
 import { IonicPage, NavParams, NavController, Platform } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 import { Audio } from '../home/priseaudio';
-//import { AffichageMap } from './googleMap';
 import { SQLitePage } from '../home/SQLitePage';
 import { InsertCategoriePage } from './insertCategorie';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, 
@@ -28,9 +27,7 @@ export class RepereInfoPage {
   categorie:  string = '';
   commentaire:string = '';
   image :     Blob;
-  //repere;
   categories;
-  //base64data;
   map: GoogleMap;
   
   constructor(
@@ -39,7 +36,6 @@ export class RepereInfoPage {
     public    navCtrl : NavController,
     public    platform : Platform,
     private   audioCtrl : Audio,
-   // private   carteCtrl : AffichageMap,
     private   sqliteCtrl : SQLitePage,
     private   googleMaps  : GoogleMaps
     ) {
@@ -54,14 +50,6 @@ export class RepereInfoPage {
       this.commentaire = rep.commentaire;
       let derniereSeparation = this.audio.lastIndexOf('/');
       this.audioName = this.audio.substring(derniereSeparation+1,this.audio.length).toLowerCase();
-      /*this.repere = {
-        id: this.id,
-        nom: this.nom ,
-        latitude: this.latitude,
-        longitude: this.longitude,
-        audio: this.audio,
-        image: this.image
-      };*/
   }
   
   ionViewWillEnter() {
@@ -83,11 +71,6 @@ export class RepereInfoPage {
   ionViewDidLoad() {
     this.platform.ready().then(() => {
       this.loadMap();
-       /* this.carteCtrl.loadMap(this.repere).then((result)=>{
-         // alert(result);
-          this.latitude = JSON.parse(JSON.stringify(result)).latitude;
-          this.longitude = JSON.parse(JSON.stringify(result)).longitude;
-        })*/
     });
   }
 
@@ -173,7 +156,7 @@ export class RepereInfoPage {
         draggable:true
       };
       //Marker repositionnable
-      let marker = this.map.addMarkerSync(markerOptions);
+      let marker:Marker = this.map.addMarkerSync(markerOptions);
       marker.showInfoWindow();
       marker.on(GoogleMapsEvent.MARKER_DRAG_END)
         .subscribe(() => {    
@@ -183,10 +166,6 @@ export class RepereInfoPage {
           document.getElementById('lng').innerHTML = this.longitude;
         });
   }
-  private test(){
-
-  }
-
 
   private changementTypeMap(typeMapRoad){
     if(typeMapRoad){

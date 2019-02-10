@@ -80,6 +80,27 @@ export class SQLitePage {
             })
             .catch(e => console.log(e)
             );
+            this.db.executeSql(
+                "CREATE TABLE IF NOT EXISTS OPTIONS" +
+                "("+
+                "idOPTIONS INTEGER PRIMARY KEY NOT NULL UNIQUE, "+
+                "opt_photo INTEGER, "+
+                "opt_audio INTEGER"+ //0 false 1 true
+                ")",[]
+            ).then(() => {
+                console.log('Table Options created !');
+                this.db.executeSql(
+                    "INSERT OR IGNORE INTO OPTIONS (idOPTIONS, opt_photo, opt_audio) "+
+                    "VALUES (1,1,0)",[]
+                ).then(() => {
+                    console.log('Insert réussi');
+                    //alert('insert ok');
+                }).catch(e => {
+                    console.log(e)
+                });
+            })
+            .catch(e => console.log(e)
+            );
         });
     }
 
@@ -216,9 +237,52 @@ export class SQLitePage {
      //   return dataSelectAll;
     }
 
+    getOptions(){
+        return new Promise((resolve) =>
+        {
+            this.db.executeSql(
+                'SELECT * '+
+                'FROM OPTIONS', []
+            ).then((result) => {
+                let data = [];
+                data.push({
+                    opt_photo : result.rows.item(0).opt_photo,
+                    opt_audio : result.rows.item(0).opt_audio
+                })
+                resolve(data);
+                console.log('');
+            }).catch(e => {
+                console.log(e)}
+            );
+        });
+    }
+
+    updateOptions($photo:number,$audio:number){
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                'UPDATE OPTIONS SET '+
+                'opt_photo = '+$photo+', '+
+                'opt_audio = '+$audio+' '+
+                'WHERE idOPTIONS = 1',[]
+            ).then(() => {
+                console.log('Update réussi');
+            }).catch(e => {
+                console.log(e);
+            }
+            );
+        });
+    }
+
     public supprimerBase() {
+        this.db.executeSql(
+            'DELETE FROM REPERES '
+        );
+        this.db.executeSql(
+            'DELETE FROM CATEGORIES '
+        );
         this.sqlite.deleteDatabase(this.options);
-        alert('supp');
     }
 
 }

@@ -29,7 +29,7 @@
     <ion-item id = "categorie">
       <ion-label color="primary" fixed >Catégorie</ion-label>
       <ion-select placeholder="Select One" (ionChange)=modifierCategorie($event)>
-        <ion-option value="null">
+        <ion-option value="">
           Pas de catégorie
         </ion-option>
         <ion-option *ngFor="let cat of categories" 

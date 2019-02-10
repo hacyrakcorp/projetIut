@@ -13,28 +13,32 @@ import { CartePage } from './carte';
   templateUrl: 'reperes.html'
 })
 export class ReperesPage {
- /* reperes = [
-    {id:1,nom:"Repere1",latitude:48.862725,longitude:2.287592},
-    {id:2,nom:"Repere2",latitude:43.6723861,longitude:4.639733200000023},
-    {id:3,nom:"Repere3",latitude:46.6723861,longitude:4.56}
-  ];*/
   reperes;
   order:string='';
 
   constructor(public navCtrl: NavController, 
     public modalCtrl : ModalController,
     public toastCtrl: ToastController,
-   // private alertCtrl: AlertController,
     private sqliteCtrl : SQLitePage, public platform : Platform) {
     
-    this.order="name";
+      this.order="name";
+  }
+
+  doRefresh(event) {
+    this.platform.ready().then(() => {
+      this.sqliteCtrl.getAll('REPERES').then((results) => {
+       this.reperes = results;
+       event.complete();
+      }).catch(()=>{
+        alert('impossible de rafraichir');
+        event.complete();
+      });
+    });
   }
   
   ionViewWillEnter() {
     this.platform.ready().then(() => {
       this.sqliteCtrl.getAll('REPERES').then((results) => {
-       // var data = JSON.stringify(results);
-       // this.reperes = JSON.parse(data);
        this.reperes = results;
       });
     });
@@ -43,8 +47,6 @@ export class ReperesPage {
   ionViewDidEnter() {
     this.platform.ready().then(() => {
       this.sqliteCtrl.getAll('REPERES').then((results) => {
-       // var data = JSON.stringify(results);
-       // this.reperes = JSON.parse(data);
        this.reperes = results;
       });
     });
@@ -53,40 +55,11 @@ export class ReperesPage {
   selectRepere(repere) {
     this.navCtrl.push(RepereInfoPage,
       { repere });
-    /*let modal = this.modalCtrl.create(RepereInfoPage,
-      { item: repere });
-
-     modal.onDidDismiss((rep) => {
-      
-       if(rep){
-         //this.reperes.push(repere);
-         let exist = false;
-        for (var i = 0; i<this.reperes.length;i++){
-          if (this.reperes[i].id == rep.id){
-            this.reperes[i] = rep;
-            exist = true;
-            break;
-          }
-        }
-        if (exist){
-          const toast = this.toastCtrl.create({
-            message: 'Repère modifié avec succès',
-            duration: 3000,
-            position : 'bottom'
-          });
-          toast.present();
-        }
-        
-       }
-     });
-	  modal.present();*/
   }
 
   trier(value){
     this.order = value;
      this.sqliteCtrl.getAll('REPERES',this.order).then((results) => {
-      //  var data = JSON.stringify(results);
-       // this.reperes = JSON.parse(data);
        this.reperes = results;
       });
   }

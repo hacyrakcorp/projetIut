@@ -24,11 +24,10 @@ import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 
 import { GPS } from '../pages/home/gps';
-import { AffichageMap } from '../pages/repere-info/googleMap';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
 
-import { CreateTable } from '../pages/home/CreateTable';
+
 import { SQLitePage } from '../pages/home/SQLitePage';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
@@ -81,10 +80,10 @@ import { Insomnia } from '@ionic-native/insomnia';
     HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ParametrePage,
-    CreateTable,SQLite,SQLitePage,
+    SQLite,SQLitePage,
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,PrisePhoto,
     Audio,Media,File,
-    GPS,GoogleMaps,,AffichageMap,Geolocation,
+    GPS,GoogleMaps,Geolocation,
     Insomnia
   ]
 })

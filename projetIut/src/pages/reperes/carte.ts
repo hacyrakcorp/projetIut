@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-//import { AffichageMap } from '../repere-info/googleMap';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, 
   LatLng, CameraPosition, MarkerOptions, Marker,
   GoogleMapsMapTypeId } from '@ionic-native/google-maps';
@@ -20,7 +19,6 @@ export class CartePage {
   lng: any;
   map: GoogleMap;
 	constructor(
-		//private 	carteCtrl : AffichageMap,
 		public 		platform 	: Platform,
 		public    navCtrl     : NavController,
 		private   googleMaps  : GoogleMaps,
@@ -32,7 +30,6 @@ export class CartePage {
     this.platform.ready(
 
 		).then(() => {
-				 //this.carteCtrl.loadMapMultiple();
 				 this.loadMapMultiple();
   	});
   
@@ -63,7 +60,7 @@ export class CartePage {
       // create CameraPosition
       let position: CameraPosition<LatLng> = {
         target: latlng,
-        zoom: 5,
+        zoom: 7,
         tilt: 30
       };
       // move the map's camera to position
