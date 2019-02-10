@@ -61,7 +61,11 @@ export class ParametrePage {
   }
 
   removeBase(){
-    this.sqlCtrl.supprimerBase();
+    if(confirm('Etes vous sûr de vouloir tout supprimer?'))
+    { // SI LA PERSONNE A APPUYER SUR OUI
+       this.sqlCtrl.supprimerBase();
+    }
+    
   }
 
 }

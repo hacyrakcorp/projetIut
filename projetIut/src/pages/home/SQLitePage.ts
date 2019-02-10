@@ -227,7 +227,8 @@ export class SQLitePage {
                     resolve(dataSelectAll);
                     }
                 ).catch(e => {
-                    console.log(e)}
+                    console.log(e);
+                }
                 );
                 }
             
@@ -282,7 +283,7 @@ export class SQLitePage {
         this.db.executeSql(
             'DELETE FROM CATEGORIES '
         );
-        this.sqlite.deleteDatabase(this.options);
+       // this.sqlite.deleteDatabase(this.options);
     }
 
 }
