@@ -18,13 +18,29 @@ export class CartePage {
 	lat: any;
   lng: any;
   map: GoogleMap;
+  markers:Marker[] = [];
+
 	constructor(
 		public 		platform 	: Platform,
 		public    navCtrl     : NavController,
 		private   googleMaps  : GoogleMaps,
     private   sqlCtrl     : SQLitePage
 		){		
-	}
+  }
+  
+  ionViewDidEnter(){
+    this.sqlCtrl.getAll('REPERES')
+    .then((result)=>{
+      this.addMarker(JSON.parse(JSON.stringify(result)));
+    });
+  }
+
+  ionViewWillEnter(){
+    this.sqlCtrl.getAll('REPERES')
+    .then((result)=>{
+      this.addMarker(JSON.parse(JSON.stringify(result)));
+    });
+  }
 
 	ionViewDidLoad() {
     this.platform.ready(
@@ -32,7 +48,6 @@ export class CartePage {
 		).then(() => {
 				 this.loadMapMultiple();
   	});
-  
 	}
 	
 
@@ -72,9 +87,13 @@ export class CartePage {
         position: latlng,
         title: repere.name
       };
+      for (let mark of this.markers) {
+        mark.remove();
+      } 
       this.map.addMarker(markerOptions)
         .then((marker: Marker) => {
             marker.showInfoWindow();
+            this.markers.push(marker);
             marker.addEventListener(
               GoogleMapsEvent.MARKER_CLICK)
               .subscribe(() => { 

@@ -3,7 +3,7 @@ import { NavController, Platform, Toast } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { GlobalServiceProvider } from '../../providers/global-service/global-service';
 
-import { ParametrePage } from '../parametre/parametre';
+//import { ParametrePage } from '../parametre/parametre';
 import { SQLitePage } from './SQLitePage';
 
 
@@ -18,7 +18,8 @@ import { GPS } from './gps';
 export class HomePage {
   isenabled:boolean=true;
   repereName:string;
-
+  opt_audio: boolean;
+  opt_photo:boolean;
   constructor(
     public navCtrl: NavController,
     public platform : Platform,
@@ -28,10 +29,29 @@ export class HomePage {
     private audioCtrl : Audio,
     private sqliteCtrl : SQLitePage,
     private GPSCtrl : GPS,
-    private paramCtrl : ParametrePage
+    //private paramCtrl : ParametrePage
     ) { 
+      this.sqliteCtrl.getOptions()
+    .then((data)=>{
+      this.opt_audio = data[0].opt_audio;
+      this.opt_photo = data[0].opt_photo;
+});
     }
-
+    ionViewDidEnter(){
+      this.sqliteCtrl.getOptions()
+      .then((data)=>{
+        this.opt_audio = data[0].opt_audio;
+        this.opt_photo = data[0].opt_photo;
+  });
+    }
+  
+    ionViewWillEnter(){
+      this.sqliteCtrl.getOptions()
+    .then((data)=>{
+      this.opt_audio = data[0].opt_audio;
+      this.opt_photo = data[0].opt_photo;
+});
+    }
   
   click($position: string) : void{
     var dateHeure = this.getDateHeure();
@@ -59,13 +79,15 @@ export class HomePage {
         this.isenabled=true;
 
           //Enregistrement Audio
-         if (this.paramCtrl.getOpt_audio() == true){
+          if (this.opt_audio){         
+          //if (this.paramCtrl.getOpt_audio() == true){
             let filePath = this.audioCtrl.startRecord();
-            let TIME_IN_MS = 5000;
+            let TIME_IN_MS = 30000;
             setTimeout( () => {  //Attendre 5 secondes et stop record
                 this.audioCtrl.stopRecord();
                 //Enregistrement photo
-                if (this.paramCtrl.getOpt_photo() == true){  
+                if (this.opt_photo){
+                //if (this.paramCtrl.getOpt_photo() == true){  
                   this.photoCtrl.photoshoot(
 
                   ).then((base64) => {
@@ -82,7 +104,8 @@ export class HomePage {
                 } 
             }, TIME_IN_MS);
           } else { // Pas d'enregistrement audio
-            if (this.paramCtrl.getOpt_photo() == true){
+            if(this.opt_photo){
+            //if (this.paramCtrl.getOpt_photo() == true){
               //Enregistrement photo
               this.photoCtrl.photoshoot(
 
