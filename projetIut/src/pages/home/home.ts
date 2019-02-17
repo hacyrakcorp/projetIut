@@ -76,8 +76,6 @@ export class HomePage {
         let data = JSON.parse(JSON.stringify(coordonnees));
         latitude = data.latitude;
         longitude = data.longitude;
-        this.isenabled=true;
-
           //Enregistrement Audio
           if (this.opt_audio){         
           //if (this.paramCtrl.getOpt_audio() == true){

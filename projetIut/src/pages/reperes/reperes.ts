@@ -68,4 +68,8 @@ export class ReperesPage {
     this.navCtrl.push(CartePage);
   }
 
+  onKeyUp($event){
+    
+  }
+
 }

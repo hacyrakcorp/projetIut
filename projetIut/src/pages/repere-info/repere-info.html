@@ -44,16 +44,24 @@
       <ion-icon name="add"></ion-icon> 
     </button>
     <ion-item>
+      <ion-label color="primary" fixed>Date</ion-label>
+      <ion-datetime disabled displayFormat="DD/MM/YYYY HH:mm" [(ngModel)]="date" ></ion-datetime>
+    </ion-item>
+    <ion-item>
       <ion-label color="primary" fixed>Nom</ion-label>
       <ion-input type="text" [(ngModel)]="nom"  placeholder="Nom du repère"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" fixed>Latitude</ion-label>
-      <ion-input id="lat" [(ngModel)]="latitude" placeholder="Latitude"></ion-input>
+      <ion-input id="lat" 
+      (ionChange)="updateLatitude()"
+      [(ngModel)]="latitude" placeholder="Latitude"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" fixed>Longitude</ion-label>
-      <ion-input id="lng" [(ngModel)]="longitude" placeholder="Longitude"></ion-input>
+      <ion-input id="lng" 
+      (ionChange)="updateLongitude()"
+      [(ngModel)]="longitude" placeholder="Longitude"></ion-input>
     </ion-item>
     <ion-item *ngIf="audio != ''"> 
       <ion-label color="primary" fixed>Audio</ion-label>

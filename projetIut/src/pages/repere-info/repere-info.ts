@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { IonicPage, NavParams, NavController, Platform } from 'ionic-angular';
+import { IonicPage, NavParams, NavController, Platform, DateTime } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
 import { Audio } from '../home/priseaudio';
 import { SQLitePage } from '../home/SQLitePage';
@@ -26,9 +26,11 @@ export class RepereInfoPage {
   audioName:  string = '';
   categorie:  string = '';
   commentaire:string = '';
+  date:       string = '';
   image :     Blob;
   categories;
   map: GoogleMap;
+  marker:Marker;
   
   constructor(
     public    viewCtrl : ViewController, 
@@ -48,6 +50,7 @@ export class RepereInfoPage {
       this.image = rep.image;
       this.categorie = rep.categorie;
       this.commentaire = rep.commentaire;
+      this.date = new Date(rep.date).toISOString();
       let derniereSeparation = this.audio.lastIndexOf('/');
       this.audioName = this.audio.substring(derniereSeparation+1,this.audio.length).toLowerCase();
   }
@@ -156,12 +159,12 @@ export class RepereInfoPage {
         draggable:true
       };
       //Marker repositionnable
-      let marker:Marker = this.map.addMarkerSync(markerOptions);
-      marker.showInfoWindow();
-      marker.on(GoogleMapsEvent.MARKER_DRAG_END)
+      this.marker = this.map.addMarkerSync(markerOptions);
+      this.marker.showInfoWindow();
+      this.marker.on(GoogleMapsEvent.MARKER_DRAG_END)
         .subscribe(() => {    
-          this.latitude = marker.getPosition().lat.toString();
-          this.longitude = marker.getPosition().lng.toString();
+          this.latitude = this.marker.getPosition().lat.toString();
+          this.longitude = this.marker.getPosition().lng.toString();
           document.getElementById('lat').innerHTML = this.latitude;
           document.getElementById('lng').innerHTML = this.longitude;
         });
@@ -174,6 +177,25 @@ export class RepereInfoPage {
       this.map.setMapTypeId(GoogleMapsMapTypeId.SATELLITE);
     }
   }
-
+  updateLatitude(){
+    let latlng: LatLng = new LatLng(parseFloat(this.latitude),parseFloat(this.longitude));
+    this.marker.setPosition(latlng);
+    let position: CameraPosition<LatLng> = {
+      target: latlng,
+      zoom: 17,
+      tilt: 30
+    };
+    this.map.moveCamera(position);
+  }
+  updateLongitude(){
+    let latlng: LatLng = new LatLng(parseFloat(this.latitude),parseFloat(this.longitude));
+    this.marker.setPosition(latlng);
+    let position: CameraPosition<LatLng> = {
+      target: latlng,
+      zoom: 17,
+      tilt: 30
+    };
+    this.map.moveCamera(position);
+  }
   
 }

@@ -29,13 +29,7 @@ export class CartePage {
   }
   
   ionViewDidEnter(){
-    this.sqlCtrl.getAll('REPERES')
-    .then((result)=>{
-      this.addMarker(JSON.parse(JSON.stringify(result)));
-    });
-  }
-
-  ionViewWillEnter(){
+    this.deleteMarkers();
     this.sqlCtrl.getAll('REPERES')
     .then((result)=>{
       this.addMarker(JSON.parse(JSON.stringify(result)));
@@ -87,9 +81,7 @@ export class CartePage {
         position: latlng,
         title: repere.name
       };
-      for (let mark of this.markers) {
-        mark.remove();
-      } 
+      
       this.map.addMarker(markerOptions)
         .then((marker: Marker) => {
             marker.showInfoWindow();
@@ -101,6 +93,13 @@ export class CartePage {
               });
         });
     }
+  }
+
+  private deleteMarkers(){
+    for (let mark of this.markers) {
+      mark.remove();
+    } 
+    this.markers = [];
   }
 
 }
