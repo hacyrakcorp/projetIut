@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
 import { RepereInfoPage } from '../repere-info/repere-info';
-import { ToastController } from 'ionic-angular';
 import { CartePage } from './carte';
+import { SQLitePage } from '../home/SQLitePage';
  //Test param car console.log ne fonctionne pas
  //import { AlertController } from 'ionic-angular';
- import { SQLitePage } from '../home/SQLitePage';
+
 
 @Component({
   selector: 'page-reperes',
@@ -16,10 +15,10 @@ export class ReperesPage {
   reperes;
   order:string='';
 
-  constructor(public navCtrl: NavController, 
-    public modalCtrl : ModalController,
-    public toastCtrl: ToastController,
-    private sqliteCtrl : SQLitePage, public platform : Platform) {
+  constructor(
+    private navCtrl: NavController, 
+    private sqliteCtrl : SQLitePage, 
+    public platform : Platform) {
     
       this.order="name";
   }
@@ -53,8 +52,7 @@ export class ReperesPage {
   }
 
   selectRepere(repere) {
-    this.navCtrl.push(RepereInfoPage,
-      { repere });
+    this.navCtrl.push(RepereInfoPage,{repere});
   }
 
   trier(value){
@@ -68,8 +66,6 @@ export class ReperesPage {
     this.navCtrl.push(CartePage);
   }
 
-  onKeyUp($event){
-    
-  }
+  
 
 }

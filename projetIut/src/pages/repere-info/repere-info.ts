@@ -1,16 +1,15 @@
-import { Component  } from '@angular/core';
-import { IonicPage, NavParams, NavController, Platform, DateTime } from 'ionic-angular';
-import { ViewController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Audio } from '../home/priseaudio';
 import { SQLitePage } from '../home/SQLitePage';
 import { InsertCategoriePage } from './insertCategorie';
 import { GoogleMaps, GoogleMap, GoogleMapsEvent, 
   LatLng, CameraPosition, MarkerOptions, Marker,
   GoogleMapsMapTypeId } from '@ionic-native/google-maps';
+import { StreetviewPage } from './streetview';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
 
-@IonicPage()
 @Component({
   selector: 'page-repere-info',
   templateUrl: 'repere-info.html',
@@ -31,9 +30,9 @@ export class RepereInfoPage {
   categories;
   map: GoogleMap;
   marker:Marker;
+
   
   constructor(
-    public    viewCtrl : ViewController, 
     public    navParams : NavParams,
     public    navCtrl : NavController,
     public    platform : Platform,
@@ -132,6 +131,7 @@ export class RepereInfoPage {
     // create a new map by passing HTMLElement
     let element: HTMLElement = document.getElementById('map');
     this.map = this.googleMaps.create(element);
+    
     // listen to MAP_READY event
     this.map.one(
       GoogleMapsEvent.MAP_READY
@@ -147,7 +147,13 @@ export class RepereInfoPage {
       // move the map's camera to position
       this.map.moveCamera(position);
       this.ajouterMarker(latlng);
+
     });
+  }
+
+  private toggleStreetView() {
+    this.navCtrl.push(StreetviewPage,
+      {latlng : {lat : this.latitude, lng : this.longitude}});
   }
 
   private ajouterMarker(latlng:LatLng){

@@ -25,6 +25,9 @@
   <button class="btn-map" ion-button color="primary" *ngIf="!typeMapRoad" (click)=changementMap()>
     Vue carte
   </button>
+  <button ion-button color="primary" (click)=toggleStreetView()>
+    <ion-icon name="man"></ion-icon>
+  </button>
   <ion-list>
     <ion-item id = "categorie">
       <ion-label color="primary" fixed >Catégorie</ion-label>

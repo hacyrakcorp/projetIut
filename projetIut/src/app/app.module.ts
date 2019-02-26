@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { InsertCategoriePage } from '../pages/repere-info/insertCategorie';
+import { StreetviewPage } from '../pages/repere-info/streetview';
 import { ReperesPage } from '../pages/reperes/reperes';
 import { RepereInfoPage } from '../pages/repere-info/repere-info';
 import { ParametrePage } from '../pages/parametre/parametre';
@@ -44,7 +45,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     AboutPage,
     ReperesPage,
     CartePage,
-	RepereInfoPage,
+	  RepereInfoPage,
     ParametrePage,
     HomePage,
     TabsPage,
@@ -52,6 +53,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     Photo,
     PrisePhoto,
     InsertCategoriePage,
+    StreetviewPage
   ],
   imports: [
     BrowserModule,
@@ -65,13 +67,14 @@ import { Insomnia } from '@ionic-native/insomnia';
     AboutPage,
     ReperesPage,
     CartePage,
-	RepereInfoPage,
+	  RepereInfoPage,
     ParametrePage,
     HomePage,
     TabsPage,
     Photo,
     Audio,
-    InsertCategoriePage
+    InsertCategoriePage,
+    StreetviewPage
   ],
   providers: [
     StatusBar,
