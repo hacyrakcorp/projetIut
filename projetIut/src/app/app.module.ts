@@ -1,49 +1,59 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
+import { InsertCategoriePage } from '../pages/repere-info/insertCategorie';
+import { StreetviewPage } from '../pages/repere-info/streetview';
 import { ReperesPage } from '../pages/reperes/reperes';
 import { RepereInfoPage } from '../pages/repere-info/repere-info';
 import { ParametrePage } from '../pages/parametre/parametre';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { CartePage } from '../pages/reperes/carte';
 
+import { PrisePhoto } from '../pages/home/prisePhoto';
 import { Photo } from '../pages/home/takephoto';
 import { Camera } from '@ionic-native/camera';
-import { CameraPreview, CameraPreviewOptions} from '@ionic-native/camera-preview';
+import { CameraPreview } from '@ionic-native/camera-preview';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 import { Audio } from '../pages/home/priseaudio';
-import { Media, MediaObject } from '@ionic-native/media';
+import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
-import { GPS } from '../pages/home/GPS';
-import { Geolocation } from '@ionic-native/geolocation'
 
-import { CreateTable } from '../pages/home/CreateTable';
+import { GPS } from '../pages/home/gps';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
+
+
 import { SQLitePage } from '../pages/home/SQLitePage';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalServiceProvider } from '../providers/global-service/global-service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Insomnia } from '@ionic-native/insomnia';
 
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
     ReperesPage,
-	RepereInfoPage,
+    CartePage,
+	  RepereInfoPage,
     ParametrePage,
     HomePage,
     TabsPage,
     Audio,
     Photo,
-    GPS
- 
+    PrisePhoto,
+    InsertCategoriePage,
+    StreetviewPage
   ],
   imports: [
     BrowserModule,
@@ -56,13 +66,15 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     AboutPage,
     ReperesPage,
-	RepereInfoPage,
+    CartePage,
+	  RepereInfoPage,
     ParametrePage,
     HomePage,
     TabsPage,
     Photo,
     Audio,
-    GPS
+    InsertCategoriePage,
+    StreetviewPage
   ],
   providers: [
     StatusBar,
@@ -70,10 +82,33 @@ import { HttpClientModule } from '@angular/common/http';
     GlobalServiceProvider,
     HttpClientModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CreateTable,SQLite,SQLitePage,
-    Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,
+    ParametrePage,
+    SQLite,SQLitePage,
+    Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,PrisePhoto,
     Audio,Media,File,
-    GPS,Geolocation
+    GPS,GoogleMaps,Geolocation,
+    Insomnia
   ]
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor(
+    public platform: Platform,
+    androidPermissions: AndroidPermissions,
+    private insomnia: Insomnia
+  ) {
+      platform.ready().then(()=>{
+        androidPermissions.requestPermissions([
+          androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+          androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+          androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
+        ]);
+
+        this.insomnia.keepAwake()
+      .then(
+        () => console.log('insomnia'),
+        () => console.log('error')
+      );
+      });
+  }
+}

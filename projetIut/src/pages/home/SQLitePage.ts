@@ -56,8 +56,11 @@ export class SQLitePage {
                 "name VARCHAR(32), "+
                 "latitude DOUBLE, "+
                 "longitude DOUBLE, "+
-                "image BLOB, "+
-                "audio VARCHAR(250)"+
+                "photo TEXT, "+
+                "audio VARCHAR(250), "+
+                "commentaire VARCHAR(250)," +
+                "date TEXT," +
+                "categorie VARCHAR(32)" +
                 ")",[]
             ).then(() => {
                 console.log('Table Repères created !');
@@ -65,6 +68,85 @@ export class SQLitePage {
             })
             .catch(e => console.log(e)
             );
+            this.db.executeSql(
+                "CREATE TABLE IF NOT EXISTS CATEGORIES" +
+                "("+
+                "libelle VARCHAR(32) PRIMARY KEY NOT NULL UNIQUE"+
+                ")",[]
+            ).then(() => {
+                //this.testInsertCategorie();
+                console.log('Table Catégories created !');
+               // alert('Table Catégories crée');
+            })
+            .catch(e => console.log(e)
+            );
+            this.db.executeSql(
+                "CREATE TABLE IF NOT EXISTS OPTIONS" +
+                "("+
+                "idOPTIONS INTEGER PRIMARY KEY NOT NULL UNIQUE, "+
+                "opt_photo INTEGER, "+
+                "opt_audio INTEGER"+ //0 false 1 true
+                ")",[]
+            ).then(() => {
+                console.log('Table Options created !');
+                this.db.executeSql(
+                    "INSERT OR IGNORE INTO OPTIONS (idOPTIONS, opt_photo, opt_audio) "+
+                    "VALUES (1,1,0)",[]
+                ).then(() => {
+                    console.log('Insert réussi');
+                    //alert('insert ok');
+                }).catch(e => {
+                    console.log(e)
+                });
+            })
+            .catch(e => console.log(e)
+            );
+        });
+    }
+
+    public insertCategorie($libelle:any[]){
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                "INSERT INTO CATEGORIES (libelle) "+
+                "VALUES (?)", $libelle
+            ).then(() => {
+                console.log('Insert réussi');
+               // alert('insert categorie ok');
+            }).catch(e => {
+                console.log(e)}
+            );
+        });
+    }
+
+    public deleteCategorie($libelle){
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                "DELETE FROM CATEGORIES "+
+                "WHERE libelle = '"+ $libelle+"'"
+            ).then(() => {
+                
+            }).catch(e => {
+                console.log(e)}
+            );  
+        });
+    }
+
+    public deleteRepere($id){
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                "DELETE FROM REPERES "+
+                "WHERE idREPERES = '"+ $id+"'"
+            ).then(() => {
+                
+            }).catch(e => {
+                console.log(e)}
+            );  
         });
     }
 
@@ -74,46 +156,79 @@ export class SQLitePage {
         ).then(() => {
             this.db.executeSql(
                 'INSERT INTO '+
-                $table+' (name,latitude,longitude,audio) '+
-                'VALUES (?,?,?,?)', $array
+                $table+' (name,latitude,longitude,audio,photo,date) '+
+                'VALUES (?,?,?,?,?,datetime("now"))', $array
             ).then(() => {
                 console.log('Insert réussi');
-                //alert('insert ok');
+                //alert('insert repere ok');
+            }).catch(e => {
+                console.log(e)}
+            );
+        });
+    }
+
+    public updateRepere($array:any[]) {
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                'UPDATE REPERES SET '+
+                'name = ?, '+
+                'latitude = ?, '+
+                'longitude = ? ,'+
+                'categorie = ? ,'+
+                'commentaire = ? '+
+                'WHERE idREPERES = ?', $array
+            ).then(() => {
+                console.log('Update réussi');
             }).catch(e => {
                 console.log(e)}
             );
         });
     }
     
-    public getAll($table) {
+    public getAll($table,$trier='') {
         
         //this.sqlite.create(
         //    this.options
         //).then(() => {
             return new Promise((resolve) =>
             {
-                this.db.executeSql(
-                    'SELECT * '+
-                    'FROM '+ $table, []
+                let sql = 'SELECT * '+ 'FROM '+ $table;
+                if($trier != ''){
+                    sql = sql + ' ORDER BY ' +$trier;
+                }
+                this.db.executeSql(     
+                    sql, []
                 ).then((results) => {
                     console.log('Select all ok');
                     //alert('select all ok ');
                     var dataSelectAll = [];
                     for (let i = 0; i < results.rows.length; i++) {
+                        if ($table == "REPERES"){
                             dataSelectAll.push({ 
                                 id : results.rows.item(i).idREPERES,
                                 name : results.rows.item(i).name,
                                 latitude : results.rows.item(i).latitude,
                                 longitude : results.rows.item(i).longitude,
-                                image : results.rows.item(i).image,
-                                audio : results.rows.item(i).audio
+                                image : results.rows.item(i).photo,
+                                audio : results.rows.item(i).audio,
+                                categorie : results.rows.item(i).categorie,
+                                commentaire : results.rows.item(i).commentaire,
+                                date : results.rows.item(i).date
                             });
-                           // alert(results.rows.item(i).audio);
+                        } else if ($table == "CATEGORIES") {
+                            dataSelectAll.push({ 
+                                libelle : results.rows.item(i).libelle
+                            });
+                        }
+                          
                     }
                     resolve(dataSelectAll);
                     }
                 ).catch(e => {
-                    console.log(e)}
+                    console.log(e);
+                }
                 );
                 }
             
@@ -121,6 +236,54 @@ export class SQLitePage {
             
         //});
      //   return dataSelectAll;
+    }
+
+    getOptions(){
+        return new Promise((resolve) =>
+        {
+            this.db.executeSql(
+                'SELECT * '+
+                'FROM OPTIONS', []
+            ).then((result) => {
+                let data = [];
+                data.push({
+                    opt_photo : result.rows.item(0).opt_photo,
+                    opt_audio : result.rows.item(0).opt_audio
+                })
+                resolve(data);
+                console.log('');
+            }).catch(e => {
+                console.log(e)}
+            );
+        });
+    }
+
+    updateOptions($photo:number,$audio:number){
+        this.sqlite.create(
+            this.options
+        ).then(() => {
+            this.db.executeSql(
+                'UPDATE OPTIONS SET '+
+                'opt_photo = '+$photo+', '+
+                'opt_audio = '+$audio+' '+
+                'WHERE idOPTIONS = 1',[]
+            ).then(() => {
+                console.log('Update réussi');
+            }).catch(e => {
+                console.log(e);
+            }
+            );
+        });
+    }
+
+    public supprimerBase() {
+        this.db.executeSql(
+            'DELETE FROM REPERES '
+        );
+        this.db.executeSql(
+            'DELETE FROM CATEGORIES '
+        );
+       // this.sqlite.deleteDatabase(this.options);
     }
 
 }
