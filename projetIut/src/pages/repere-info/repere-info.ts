@@ -82,7 +82,12 @@ export class RepereInfoPage {
   }
 
   play(file){
-    this.audioCtrl.playAudio(file,'');
+    let duree = this.audioCtrl.playAudio(file,'');
+    setTimeout(()=>{
+      if (!this.playing){
+        this.playing = true;
+      }
+    },duree);
     this.playing = true;
   }
 

@@ -112,6 +112,7 @@ export class Audio {
       }
       this.audio.play();
       this.audio.setVolume(0.8);
+      return this.audio.getDuration();
     }
 
     stopAudio(){
