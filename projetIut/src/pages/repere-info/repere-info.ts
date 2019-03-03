@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Component, Testability } from '@angular/core';
+import { NavController, NavParams, Platform, SelectPopover, AlertController } from 'ionic-angular';
 import { Audio } from '../home/priseaudio';
 import { SQLitePage } from '../home/SQLitePage';
 import { InsertCategoriePage } from './insertCategorie';
@@ -7,6 +7,7 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent,
   LatLng, CameraPosition, MarkerOptions, Marker,
   GoogleMapsMapTypeId } from '@ionic-native/google-maps';
 import { StreetviewPage } from './streetview';
+import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
 
@@ -80,14 +81,35 @@ export class RepereInfoPage {
     this.audioCtrl.stopAudio();
     this.playing = false;
   }
-
+  timer;
   play(file){
-    this.audioCtrl.playAudio(file,'');
-    this.playing = true;
+    this.audioCtrl.playAudio(file,'').then((res:MediaObject) => {
+      this.playing = true;
+      var counter = 0;
+      var dur = 0;
+      var timerDur = setInterval(()=> {
+        counter += 100;
+        if (counter > 2000) {
+           clearInterval(timerDur);
+        }
+        dur = res.getDuration();
+        if (dur > 0) {
+          let times = dur*1000;
+          this.timer = setTimeout(()=> { 
+            if(this.playing){
+              this.playing = false;
+            }
+          },times);
+          clearInterval(timerDur);
+        }
+    }, 100);
+        
+      });
   }
 
   stop(){
     this.audioCtrl.stopAudio();
+    clearTimeout(this.timer);
     this.playing = false;
   }
 
