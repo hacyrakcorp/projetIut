@@ -1,7 +1,0 @@
-{
-  "name": "projetIut",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
