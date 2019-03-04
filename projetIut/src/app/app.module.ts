@@ -8,12 +8,15 @@ import { InsertCategoriePage } from '../pages/repere-info/insertCategorie';
 import { StreetviewPage } from '../pages/repere-info/streetview';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { twitterPage } from '../pages/repere-info/Twitter';
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
 import { twitterPage } from '../pages/repere-info/Twitter';
 >>>>>>> loic
+=======
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 import { ReperesPage } from '../pages/reperes/reperes';
 import { RepereInfoPage } from '../pages/repere-info/repere-info';
 import { ParametrePage } from '../pages/parametre/parametre';
@@ -22,12 +25,15 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { CartePage } from '../pages/reperes/carte';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import{InAppBrowser} from '@ionic-native/in-app-browser';
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
 import{InAppBrowser} from '@ionic-native/in-app-browser';
 >>>>>>> loic
+=======
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 
 import { PrisePhoto } from '../pages/home/prisePhoto';
 import { Photo } from '../pages/home/takephoto';
@@ -71,6 +77,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     InsertCategoriePage,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     StreetviewPage,
     twitterPage
 =======
@@ -80,6 +87,9 @@ import { Insomnia } from '@ionic-native/insomnia';
     StreetviewPage,
     twitterPage
 >>>>>>> loic
+=======
+    StreetviewPage
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
   ],
   imports: [
     BrowserModule,
@@ -102,6 +112,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     InsertCategoriePage,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     StreetviewPage,
     twitterPage
 =======
@@ -111,6 +122,9 @@ import { Insomnia } from '@ionic-native/insomnia';
     StreetviewPage,
     twitterPage
 >>>>>>> loic
+=======
+    StreetviewPage
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
   ],
   providers: [
     StatusBar,
@@ -125,6 +139,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     GPS,GoogleMaps,Geolocation,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Insomnia,
     InAppBrowser
 =======
@@ -134,6 +149,9 @@ import { Insomnia } from '@ionic-native/insomnia';
     Insomnia,
     InAppBrowser
 >>>>>>> loic
+=======
+    Insomnia
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
   ]
 })
 export class AppModule {

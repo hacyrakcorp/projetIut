@@ -106,12 +106,15 @@
     <plugin name="cordova-plugin-insomnia" spec="^4.3.0" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
 >>>>>>> loic
+=======
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.1.4" />
 </widget>

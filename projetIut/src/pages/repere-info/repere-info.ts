@@ -9,6 +9,7 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent,
 import { StreetviewPage } from './streetview';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> loic
 import { twitterPage } from './Twitter';
@@ -24,6 +25,11 @@ import { MediaObject } from '@ionic-native/media';
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
 >>>>>>> loic
+=======
+import { MediaObject } from '@ionic-native/media';
+//Test param car console.log ne fonctionne pas
+//import { AlertController } from 'ionic-angular';
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 
 @Component({
   selector: 'page-repere-info',
@@ -55,6 +61,7 @@ export class RepereInfoPage {
     private   sqliteCtrl : SQLitePage,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private   googleMaps  : GoogleMaps,
     private iab: InAppBrowser
 =======
@@ -64,6 +71,9 @@ export class RepereInfoPage {
     private   googleMaps  : GoogleMaps,
     private iab: InAppBrowser
 >>>>>>> loic
+=======
+    private   googleMaps  : GoogleMaps
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
     ) {
       let rep = navParams.get('repere');
       this.id = rep.id;
@@ -204,6 +214,7 @@ export class RepereInfoPage {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> loic
   private loadTwitter(){
@@ -216,6 +227,8 @@ export class RepereInfoPage {
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
 >>>>>>> loic
+=======
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
   private ajouterMarker(latlng:LatLng){
       // create new marker
       let markerOptions: MarkerOptions = {
@@ -235,6 +248,9 @@ export class RepereInfoPage {
           document.getElementById('lng').innerHTML = this.longitude;
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
   }
 
   private changementTypeMap(typeMapRoad){
@@ -244,6 +260,7 @@ export class RepereInfoPage {
       this.map.setMapTypeId(GoogleMapsMapTypeId.SATELLITE);
     }
   }
+<<<<<<< HEAD
 =======
   }
 
@@ -254,6 +271,8 @@ export class RepereInfoPage {
       this.map.setMapTypeId(GoogleMapsMapTypeId.SATELLITE);
     }
   }
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
   updateLatitude(){
     let latlng: LatLng = new LatLng(parseFloat(this.latitude),parseFloat(this.longitude));
