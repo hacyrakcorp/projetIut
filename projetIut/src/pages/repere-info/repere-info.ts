@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Component, Testability } from '@angular/core';
+import { NavController, NavParams, Platform, SelectPopover, AlertController } from 'ionic-angular';
 import { Audio } from '../home/priseaudio';
 import { SQLitePage } from '../home/SQLitePage';
 import { InsertCategoriePage } from './insertCategorie';
@@ -7,8 +7,23 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent,
   LatLng, CameraPosition, MarkerOptions, Marker,
   GoogleMapsMapTypeId } from '@ionic-native/google-maps';
 import { StreetviewPage } from './streetview';
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> loic
+import { twitterPage } from './Twitter';
+import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+<<<<<<< HEAD
+=======
+import { MediaObject } from '@ionic-native/media';
+//Test param car console.log ne fonctionne pas
+//import { AlertController } from 'ionic-angular';
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+>>>>>>> loic
 
 @Component({
   selector: 'page-repere-info',
@@ -38,7 +53,17 @@ export class RepereInfoPage {
     public    platform : Platform,
     private   audioCtrl : Audio,
     private   sqliteCtrl : SQLitePage,
+<<<<<<< HEAD
+<<<<<<< HEAD
+    private   googleMaps  : GoogleMaps,
+    private iab: InAppBrowser
+=======
     private   googleMaps  : GoogleMaps
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+    private   googleMaps  : GoogleMaps,
+    private iab: InAppBrowser
+>>>>>>> loic
     ) {
       let rep = navParams.get('repere');
       this.id = rep.id;
@@ -80,14 +105,35 @@ export class RepereInfoPage {
     this.audioCtrl.stopAudio();
     this.playing = false;
   }
-
+  timer;
   play(file){
-    this.audioCtrl.playAudio(file,'');
-    this.playing = true;
+    this.audioCtrl.playAudio(file,'').then((res:MediaObject) => {
+      this.playing = true;
+      var counter = 0;
+      var dur = 0;
+      var timerDur = setInterval(()=> {
+        counter += 100;
+        if (counter > 2000) {
+           clearInterval(timerDur);
+        }
+        dur = res.getDuration();
+        if (dur > 0) {
+          let times = dur*1000;
+          this.timer = setTimeout(()=> { 
+            if(this.playing){
+              this.playing = false;
+            }
+          },times);
+          clearInterval(timerDur);
+        }
+    }, 100);
+        
+      });
   }
 
   stop(){
     this.audioCtrl.stopAudio();
+    clearTimeout(this.timer);
     this.playing = false;
   }
 
@@ -156,6 +202,20 @@ export class RepereInfoPage {
       {latlng : {lat : this.latitude, lng : this.longitude}});
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> loic
+  private loadTwitter(){
+    var monframe = "http://mobile.twitter.com/search?f=tweets&q=geocode:"+this.latitude+","+this.longitude+",30km" ;
+        const browser = this.iab.create(monframe,'_blank','location=no');
+  }
+
+<<<<<<< HEAD
+=======
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+>>>>>>> loic
   private ajouterMarker(latlng:LatLng){
       // create new marker
       let markerOptions: MarkerOptions = {
@@ -174,6 +234,7 @@ export class RepereInfoPage {
           document.getElementById('lat').innerHTML = this.latitude;
           document.getElementById('lng').innerHTML = this.longitude;
         });
+<<<<<<< HEAD
   }
 
   private changementTypeMap(typeMapRoad){
@@ -183,6 +244,17 @@ export class RepereInfoPage {
       this.map.setMapTypeId(GoogleMapsMapTypeId.SATELLITE);
     }
   }
+=======
+  }
+
+  private changementTypeMap(typeMapRoad){
+    if(typeMapRoad){
+      this.map.setMapTypeId(GoogleMapsMapTypeId.ROADMAP);
+    } else {
+      this.map.setMapTypeId(GoogleMapsMapTypeId.SATELLITE);
+    }
+  }
+>>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
   updateLatitude(){
     let latlng: LatLng = new LatLng(parseFloat(this.latitude),parseFloat(this.longitude));
     this.marker.setPosition(latlng);
