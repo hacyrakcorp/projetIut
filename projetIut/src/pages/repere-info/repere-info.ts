@@ -10,6 +10,9 @@ import { StreetviewPage } from './streetview';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> loic
 =======
 >>>>>>> loic
 import { twitterPage } from './Twitter';
@@ -17,6 +20,7 @@ import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 import { MediaObject } from '@ionic-native/media';
@@ -30,6 +34,8 @@ import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+>>>>>>> loic
 
 @Component({
   selector: 'page-repere-info',
@@ -62,6 +68,7 @@ export class RepereInfoPage {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private   googleMaps  : GoogleMaps,
     private iab: InAppBrowser
 =======
@@ -74,6 +81,10 @@ export class RepereInfoPage {
 =======
     private   googleMaps  : GoogleMaps
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+    private   googleMaps  : GoogleMaps,
+    private iab: InAppBrowser
+>>>>>>> loic
     ) {
       let rep = navParams.get('repere');
       this.id = rep.id;
@@ -215,6 +226,9 @@ export class RepereInfoPage {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> loic
 =======
 >>>>>>> loic
   private loadTwitter(){
@@ -223,12 +237,15 @@ export class RepereInfoPage {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
 >>>>>>> loic
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+>>>>>>> loic
   private ajouterMarker(latlng:LatLng){
       // create new marker
       let markerOptions: MarkerOptions = {

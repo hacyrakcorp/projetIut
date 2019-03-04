@@ -31,6 +31,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@ionic-native/in-app-browser": "^4.20.0",
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
@@ -39,6 +40,9 @@
 >>>>>>> loic
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+    "@ionic-native/in-app-browser": "^4.20.0",
+>>>>>>> loic
     "@ionic-native/insomnia": "^4.20.0",
     "@ionic-native/media": "^4.19.0",
     "@ionic-native/media-capture": "^4.19.0",
@@ -133,6 +137,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "cordova-plugin-insomnia": {},
       "cordova-plugin-inappbrowser": {}
 =======
@@ -145,6 +150,10 @@
 =======
       "cordova-plugin-insomnia": {}
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+      "cordova-plugin-insomnia": {},
+      "cordova-plugin-inappbrowser": {}
+>>>>>>> loic
     },
     "platforms": [
       "browser",
