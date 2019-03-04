@@ -10,6 +10,7 @@ import { StreetviewPage } from '../pages/repere-info/streetview';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { twitterPage } from '../pages/repere-info/Twitter';
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
@@ -19,8 +20,9 @@ import { twitterPage } from '../pages/repere-info/Twitter';
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
-import { twitterPage } from '../pages/repere-info/Twitter';
->>>>>>> loic
+>>>>>>> parent of e68e53f... ok
+=======
+>>>>>>> parent of 9015399... pas de soucis
 import { ReperesPage } from '../pages/reperes/reperes';
 import { RepereInfoPage } from '../pages/repere-info/repere-info';
 import { ParametrePage } from '../pages/parametre/parametre';
@@ -31,6 +33,7 @@ import { CartePage } from '../pages/reperes/carte';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import{InAppBrowser} from '@ionic-native/in-app-browser';
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
@@ -40,8 +43,9 @@ import{InAppBrowser} from '@ionic-native/in-app-browser';
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
-import{InAppBrowser} from '@ionic-native/in-app-browser';
->>>>>>> loic
+>>>>>>> parent of e68e53f... ok
+=======
+>>>>>>> parent of 9015399... pas de soucis
 
 import { PrisePhoto } from '../pages/home/prisePhoto';
 import { Photo } from '../pages/home/takephoto';
@@ -87,6 +91,7 @@ import { Insomnia } from '@ionic-native/insomnia';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     StreetviewPage,
     twitterPage
 =======
@@ -100,9 +105,11 @@ import { Insomnia } from '@ionic-native/insomnia';
     StreetviewPage
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
-    StreetviewPage,
-    twitterPage
->>>>>>> loic
+    StreetviewPage
+>>>>>>> parent of e68e53f... ok
+=======
+    StreetviewPage
+>>>>>>> parent of 9015399... pas de soucis
   ],
   imports: [
     BrowserModule,
@@ -127,6 +134,7 @@ import { Insomnia } from '@ionic-native/insomnia';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     StreetviewPage,
     twitterPage
 =======
@@ -140,9 +148,11 @@ import { Insomnia } from '@ionic-native/insomnia';
     StreetviewPage
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
-    StreetviewPage,
-    twitterPage
->>>>>>> loic
+    StreetviewPage
+>>>>>>> parent of e68e53f... ok
+=======
+    StreetviewPage
+>>>>>>> parent of 9015399... pas de soucis
   ],
   providers: [
     StatusBar,
@@ -159,6 +169,7 @@ import { Insomnia } from '@ionic-native/insomnia';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Insomnia,
     InAppBrowser
 =======
@@ -172,9 +183,11 @@ import { Insomnia } from '@ionic-native/insomnia';
     Insomnia
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
-    Insomnia,
-    InAppBrowser
->>>>>>> loic
+    Insomnia
+>>>>>>> parent of e68e53f... ok
+=======
+    Insomnia
+>>>>>>> parent of 9015399... pas de soucis
   ]
 })
 export class AppModule {

@@ -32,6 +32,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@ionic-native/in-app-browser": "^4.20.0",
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
@@ -41,8 +42,9 @@
 =======
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
-    "@ionic-native/in-app-browser": "^4.20.0",
->>>>>>> loic
+>>>>>>> parent of e68e53f... ok
+=======
+>>>>>>> parent of 9015399... pas de soucis
     "@ionic-native/insomnia": "^4.20.0",
     "@ionic-native/media": "^4.19.0",
     "@ionic-native/media-capture": "^4.19.0",
@@ -64,11 +66,18 @@
     "cordova-plugin-geolocation": "^4.0.1",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of e68e53f... ok
+=======
+>>>>>>> parent of 9015399... pas de soucis
     "cordova-plugin-googlemaps": "^2.5.2",
-    "cordova-plugin-inappbrowser": "3.0.0",
     "cordova-plugin-insomnia": "^4.3.0",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^2.4.0",
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "cordova-plugin-googlemaps": "^2.4.6",
     "cordova-plugin-insomnia": "^4.3.0",
@@ -81,11 +90,17 @@
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^2.3.2",
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+>>>>>>> parent of e68e53f... ok
+=======
+>>>>>>> parent of 9015399... pas de soucis
     "cordova-plugin-media": "^5.0.2",
     "cordova-plugin-media-capture": "^3.0.2",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "cordova-sqlite-storage": "^2.6.0",
@@ -95,6 +110,12 @@
 =======
     "cordova-sqlite-storage": "^2.5.2",
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+=======
+    "cordova-sqlite-storage": "^2.6.0",
+>>>>>>> parent of e68e53f... ok
+=======
+    "cordova-sqlite-storage": "^2.6.0",
+>>>>>>> parent of 9015399... pas de soucis
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "rxjs": "5.5.11",
@@ -138,6 +159,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "cordova-plugin-insomnia": {},
       "cordova-plugin-inappbrowser": {}
 =======
@@ -151,9 +173,11 @@
       "cordova-plugin-insomnia": {}
 >>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
 =======
-      "cordova-plugin-insomnia": {},
-      "cordova-plugin-inappbrowser": {}
->>>>>>> loic
+      "cordova-plugin-insomnia": {}
+>>>>>>> parent of e68e53f... ok
+=======
+      "cordova-plugin-insomnia": {}
+>>>>>>> parent of 9015399... pas de soucis
     },
     "platforms": [
       "browser",

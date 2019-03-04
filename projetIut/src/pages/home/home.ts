@@ -21,11 +21,6 @@ export class HomePage {
   opt_audio: boolean;
   opt_photo:boolean;
   clickstate:boolean=false;
-  photographie;
-  latitude;
-  longitude;
-  filePath;
-  chrono;
   constructor(
     public navCtrl: NavController,
     public platform : Platform,
@@ -61,77 +56,88 @@ export class HomePage {
   
   click($position: string) : void{
     var dateHeure = this.getDateHeure();
-    const repereOK = this.toastCtrl.create({
-      message: "Enregistrement du point d'intérêt",
-      duration: 3000,
-      position : $position
-    });
-    //var latitude : any;
-    //var longitude : any;
-    const TABLE_REPERES : string = 'REPERES';
-    //var filePath;
-    
-    if (!this.clickstate){
-      alert('oneclick');
-      if(this.opt_audio){
-        this.isenabled=true;
-      } else {
-        this.isenabled=false;
-      }
-      this.platform.ready().then(() => {
-        //init
-        this.repereName ='repere '+ dateHeure;    
-        //Enregistrement GPS
-        this.GPSCtrl.getLatitudeLongitude(
+	this.clickstate = true;
+    this.platform.ready().then(() => {
+      //init
+      this.repereName ='repere '+ dateHeure;
+      var latitude : any;
+      var longitude : any;
+      const TABLE_REPERES : string = 'REPERES';
+      this.isenabled=false;
+      const repereOK = this.toastCtrl.create({
+        message: "Enregistrement du point d'intérêt",
+        duration: 3000,
+        position : $position
+      });
 
-        ).then((coordonnees) =>{
-          let data = JSON.parse(JSON.stringify(coordonnees));
-          this.latitude = data.latitude;
-          this.longitude = data.longitude;
+      //Enregistrement GPS
+      this.GPSCtrl.getLatitudeLongitude(
+
+      ).then((coordonnees) =>{
+        let data = JSON.parse(JSON.stringify(coordonnees));
+        latitude = data.latitude;
+        longitude = data.longitude;
 		
           //Enregistrement Audio
           if (this.opt_audio){    
-            this.clickstate = true;
-            //Enregistrement photo
-            if (this.opt_photo){ 
-                this.photoCtrl.photoshoot(
 
-                ).then((base64) => {
-                  this.photographie = base64;
-                //  let array = [this.repereName,latitude,longitude,filePath,base64];
-                  //this.sqliteCtrl.insert(TABLE_REPERES,array);
-                 // this.isenabled = true;
-                  //repereOK.present();
-                })//.catch(err=>this.isenabled = true);
-            } else {
-              this.photographie = '';
-                //let array = [this.repereName,latitude,longitude,filePath,''];
-                //this.sqliteCtrl.insert(TABLE_REPERES,array);
-              //  this.isenabled = true;
-              //  repereOK.present();
-            } 
+          //if (this.paramCtrl.getOpt_audio() == true){
+			  
+			  
+            let filePath = this.audioCtrl.startRecord();
+			
+			this.isenabled = true;
+					
+            let TIME_IN_MS = 30;
+			
+			let chrono;
+			
+			if(this.clickstate == false){
+	
+			chrono = 0;
+			}
+			
+			while(chrono != TIME_IN_MS){
+	//la boucle infini
+			if(this.clickstate == true){
+				this.audioCtrl.stopRecord();
+	
+				this.clickstate = false;
+				
+				}
+				this.sleep(1000);
+				chrono ++;
+			}
+			
+			this.clickstate=false;
+			
+			                //Enregistrement photo		  
+		    if (this.opt_photo){
+                //if (this.paramCtrl.getOpt_photo() == true){  
+                  this.photoCtrl.photoshoot(
 
-            this.filePath = this.audioCtrl.startRecord();
-            let TIME_IN_MS = 30000;
-            this.chrono = setTimeout(() => {
-              //Enregistrement bdd
-              let array = [this.repereName,
-                this.latitude,
-                this.longitude,
-                this.filePath,
-                this.photographie];
-              this.sqliteCtrl.insert(TABLE_REPERES,array);
-              repereOK.present();
-            }, TIME_IN_MS);
-			     /* let chrono = 0;
-			      while(chrono != TIME_IN_MS){
-				      this.sleep(1000);
-				      chrono ++;
-			      }
-            this.audioCtrl.stopRecord();
-            this.clickstate = false;*/
-            
-            
+                  ).then((base64) => {
+                    let array = [this.repereName,latitude,longitude,filePath,base64];
+                    this.sqliteCtrl.insert(TABLE_REPERES,array);
+                    this.isenabled = true;
+                    repereOK.present();
+                  }).catch(err=>this.isenabled = true);
+                } else {
+                  let array = [this.repereName,latitude,longitude,filePath,''];
+                  this.sqliteCtrl.insert(TABLE_REPERES,array);
+                  this.isenabled = true;
+                  repereOK.present();
+                } 
+			
+			
+			
+            /*setTimeout( () => {  
+			
+			//Attendre 5 secondes et stop record
+			
+                this.audioCtrl.stopRecord();
+
+				}, TIME_IN_MS);}*/
           } else { // Pas d'enregistrement audio
             if(this.opt_photo){
             //if (this.paramCtrl.getOpt_photo() == true){
@@ -139,13 +145,13 @@ export class HomePage {
               this.photoCtrl.photoshoot(
 
               ).then((base64) => {
-                let array = [this.repereName,this.latitude,this.longitude,'',base64];
+                let array = [this.repereName,latitude,longitude,'',base64];
                 this.sqliteCtrl.insert(TABLE_REPERES,array); 
                 this.isenabled = true;
                 repereOK.present();
               }).catch(err=>this.isenabled = true);
             } else {
-              let array = [this.repereName,this.latitude,this.longitude,'',''];
+              let array = [this.repereName,latitude,longitude,'',''];
               this.sqliteCtrl.insert(TABLE_REPERES,array);
               this.isenabled = true;
               repereOK.present();
@@ -163,19 +169,18 @@ export class HomePage {
       this.isenabled = true;
       
     });
-
-    } else {
-      alert('second click');
-      this.audioCtrl.stopRecord();
-      this.clickstate = false;
-      //Enregistrement bdd
-      let array = [this.repereName,this.latitude,this.longitude,this.filePath,this.photographie];
-      this.sqliteCtrl.insert(TABLE_REPERES,array);
-      repereOK.present();
-      clearTimeout(this.chrono);
-    }
   }
 
+  private sleep(milliseconds){
+	var start = new Date().getTime();
+	for (var i=0;i<1e7;i++){
+		if((new Date().getTime() - start) > milliseconds){
+			break;
+		}
+	}
+	
+  }
+  
   getDateHeure():string{
     var annee:string = new Date().getFullYear().toString();
     var mois: string = (new Date().getMonth()+1).toString();
