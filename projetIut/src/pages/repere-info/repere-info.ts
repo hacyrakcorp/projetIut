@@ -7,35 +7,21 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent,
   LatLng, CameraPosition, MarkerOptions, Marker,
   GoogleMapsMapTypeId } from '@ionic-native/google-maps';
 import { StreetviewPage } from './streetview';
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> loic
-=======
->>>>>>> loic
+
 import { twitterPage } from './Twitter';
 import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
-=======
->>>>>>> loic
-=======
+
 import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
-=======
->>>>>>> loic
+
 
 @Component({
   selector: 'page-repere-info',
@@ -65,26 +51,20 @@ export class RepereInfoPage {
     public    platform : Platform,
     private   audioCtrl : Audio,
     private   sqliteCtrl : SQLitePage,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     private   googleMaps  : GoogleMaps,
     private iab: InAppBrowser
-=======
+
     private   googleMaps  : GoogleMaps
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
-=======
+
     private   googleMaps  : GoogleMaps,
     private iab: InAppBrowser
->>>>>>> loic
-=======
+
     private   googleMaps  : GoogleMaps
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
-=======
+
     private   googleMaps  : GoogleMaps,
     private iab: InAppBrowser
->>>>>>> loic
+
     ) {
       let rep = navParams.get('repere');
       this.id = rep.id;
@@ -223,29 +203,12 @@ export class RepereInfoPage {
       {latlng : {lat : this.latitude, lng : this.longitude}});
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> loic
-=======
->>>>>>> loic
+
   private loadTwitter(){
-    var monframe = "http://mobile.twitter.com/search?f=tweets&q=geocode:"+this.latitude+","+this.longitude+",30km" ;
+    var monframe = "http://mobile.twitter.com/search?f=tweets&q=geocode:"+this.latitude+","+this.longitude+",20km" ;
         const browser = this.iab.create(monframe,'_blank','location=no');
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
-=======
->>>>>>> loic
-=======
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
-=======
->>>>>>> loic
   private ajouterMarker(latlng:LatLng){
       // create new marker
       let markerOptions: MarkerOptions = {
@@ -264,10 +227,6 @@ export class RepereInfoPage {
           document.getElementById('lat').innerHTML = this.latitude;
           document.getElementById('lng').innerHTML = this.longitude;
         });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
   }
 
   private changementTypeMap(typeMapRoad){
@@ -277,8 +236,7 @@ export class RepereInfoPage {
       this.map.setMapTypeId(GoogleMapsMapTypeId.SATELLITE);
     }
   }
-<<<<<<< HEAD
-=======
+
   }
 
   private changementTypeMap(typeMapRoad){
@@ -288,9 +246,7 @@ export class RepereInfoPage {
       this.map.setMapTypeId(GoogleMapsMapTypeId.SATELLITE);
     }
   }
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
-=======
->>>>>>> 988026d81e28e17692eb1cbd8cb7c89aa01c0753
+
   updateLatitude(){
     let latlng: LatLng = new LatLng(parseFloat(this.latitude),parseFloat(this.longitude));
     this.marker.setPosition(latlng);
