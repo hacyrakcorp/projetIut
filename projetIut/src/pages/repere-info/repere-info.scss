@@ -1,0 +1,31 @@
+/*ion-app._gmaps_cdv_ .nav-decor{
+    background-color: transparent !important;
+}*/
+
+page-repere-info {
+    
+    #map {
+        height:     50%;
+        width:      50%;
+        float:      left;
+    }
+
+    .btn-map{
+        width:      35%;
+    }
+
+    #photo{
+        height:     50%;
+        width:      50%;
+        margin:     auto;
+        float:      right;
+    }
+
+    #categorie{
+        float:      left;
+        width:      80%;
+    }
+    #btn-cat{
+        float:      right;
+    }
+}

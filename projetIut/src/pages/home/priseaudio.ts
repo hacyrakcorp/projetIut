@@ -21,7 +21,7 @@ export class Audio {
   audio: MediaObject;
   //la liste des des enregistrement
   audioList: any[] = [];
-
+  mediaTimer;
   //constructeur
   constructor(
     private media: Media,  
@@ -101,18 +101,22 @@ export class Audio {
     }
     
     playAudio(file,idx) {
-      if (this.platform.is('ios')) {
-        this.audio = this.media.create(file);
-      }
-      else if (this.platform.is('android')) {
-        this.audio = this.media.create(file);
-      } else if (this.platform.is('cordova')) {
-        this.filePath = 'C:/Projets/projetIut/projetIut/' + file;
-        this.audio = this.media.create(file);
-      }
-      this.audio.play();
-      this.audio.setVolume(0.8);
-      return this.audio.getDuration();
+      
+      return new Promise((resolve) => {
+        if (this.platform.is('ios')) {
+          this.audio = this.media.create(file);
+        }
+        else if (this.platform.is('android')) {
+          this.audio = this.media.create(file);
+        } else if (this.platform.is('cordova')) {
+          this.filePath = 'C:/Projets/projetIut/projetIut/' + file;
+          this.audio = this.media.create(file);
+        }
+        this.audio.play();
+        this.audio.setVolume(0.8);
+        resolve(this.audio);
+      });
+        
     }
 
     stopAudio(){

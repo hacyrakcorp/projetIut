@@ -1,0 +1,19 @@
+/*ion-app._gmaps_cdv_ .nav-decor{
+    background-color: transparent !important;
+  }*/
+
+page-home {
+    #save-button {
+        //Bouton rond
+        height : 300px;
+        width: 300px;
+        border-radius: 50%;
+        margin: auto; //centre le bouton
+    }
+
+    #save-icon{
+        font-size: 900%;
+    }
+
+
+}

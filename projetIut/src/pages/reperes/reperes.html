@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Repères
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="carte()">
+        <ion-icon name="map"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+  <ion-item id="order">
+        <ion-label>Tri</ion-label>
+        <ion-select 
+         placeholder="Select One" (ionChange)=trier($event)>
+         <ion-option value="date">
+            Date
+          </ion-option>
+          <ion-option value="name">
+            Nom
+          </ion-option>
+          <ion-option value="categorie">
+            Catégorie
+          </ion-option>
+        </ion-select>
+      </ion-item>
+  <ion-list> 
+    <button ion-item (click)="selectRepere(repere)" *ngFor="let repere of reperes">
+      <h1>{{repere.name}}</h1>
+      <p>catégorie : {{repere.categorie}}</p>
+      <p>date : {{repere.date}}</p>
+    </button>
+  </ion-list>
+</ion-content>

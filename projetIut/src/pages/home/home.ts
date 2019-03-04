@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, Toast, AlertController } from 'ionic-angular';
+import { NavController, Platform, Toast } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { GlobalServiceProvider } from '../../providers/global-service/global-service';
 
@@ -174,19 +174,8 @@ export class HomePage {
       repereOK.present();
       clearTimeout(this.chrono);
     }
-    
   }
 
-  private sleep(milliseconds){
-	var start = new Date().getTime();
-	for (var i=0;i<1e7;i++){
-		if((new Date().getTime() - start) > milliseconds){
-			break;
-		}
-	}
-	
-  }
-  
   getDateHeure():string{
     var annee:string = new Date().getFullYear().toString();
     var mois: string = (new Date().getMonth()+1).toString();

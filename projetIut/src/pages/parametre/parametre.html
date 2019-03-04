@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Paramètres
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>Gestion de l'application</ion-list-header>
+        
+        <ion-buttons>
+            Tout supprimer (repères et catégories)
+            <button ion-button icon-only float-right color="danger" (click)="removeBase()">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    <ion-item>
+      <ion-label>Audio</ion-label>
+      <ion-toggle [(ngModel)]="audio" (ionChange)="notifyAudio()"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Photo</ion-label>
+      <ion-toggle [(ngModel)]="photo" (ionChange)="notifyPhoto()"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>Informations</ion-list-header>
+    <ion-item>
+      <ion-icon name="paw" item-start></ion-icon>
+      Cécile Aliaga
+    </ion-item>
+    <ion-item>
+      <ion-icon name="paw" item-start></ion-icon>
+      Loic Disarbois
+    </ion-item>
+    <ion-item>
+      <ion-icon name="paw" item-start></ion-icon>
+      Xavier La
+    </ion-item>
+    <ion-item>
+      <ion-icon name="paw" item-start></ion-icon>
+      Matéo Habasque
+    </ion-item>
+    <ion-item>
+      <ion-icon name="paw" item-start></ion-icon>
+      Mohamed Hairani
+    </ion-item>
+    <ion-item>
+      <ion-icon name="paw" item-start></ion-icon>
+      Greg Malvolti
+    </ion-item>
+    <ion-item>
+      <ion-icon name="logo-android" item-start></ion-icon>
+      2019, Iut Arles, LP_CODESI
+    </ion-item>
+    <ion-item>
+      <ion-icon name="ionic" item-start></ion-icon>
+      @ionicframework
+    </ion-item>
+  </ion-list>
+</ion-content>

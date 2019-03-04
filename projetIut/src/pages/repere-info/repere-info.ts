@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Component, Testability } from '@angular/core';
+import { NavController, NavParams, Platform, SelectPopover, AlertController } from 'ionic-angular';
 import { Audio } from '../home/priseaudio';
 import { SQLitePage } from '../home/SQLitePage';
 import { InsertCategoriePage } from './insertCategorie';
@@ -7,8 +7,11 @@ import { GoogleMaps, GoogleMap, GoogleMapsEvent,
   LatLng, CameraPosition, MarkerOptions, Marker,
   GoogleMapsMapTypeId } from '@ionic-native/google-maps';
 import { StreetviewPage } from './streetview';
+import { twitterPage } from './Twitter';
+import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-repere-info',
@@ -38,7 +41,8 @@ export class RepereInfoPage {
     public    platform : Platform,
     private   audioCtrl : Audio,
     private   sqliteCtrl : SQLitePage,
-    private   googleMaps  : GoogleMaps
+    private   googleMaps  : GoogleMaps,
+    private iab: InAppBrowser
     ) {
       let rep = navParams.get('repere');
       this.id = rep.id;
@@ -80,19 +84,35 @@ export class RepereInfoPage {
     this.audioCtrl.stopAudio();
     this.playing = false;
   }
-
+  timer;
   play(file){
-    let duree = this.audioCtrl.playAudio(file,'');
-    setTimeout(()=>{
-      if (!this.playing){
-        this.playing = true;
-      }
-    },duree);
-    this.playing = true;
+    this.audioCtrl.playAudio(file,'').then((res:MediaObject) => {
+      this.playing = true;
+      var counter = 0;
+      var dur = 0;
+      var timerDur = setInterval(()=> {
+        counter += 100;
+        if (counter > 2000) {
+           clearInterval(timerDur);
+        }
+        dur = res.getDuration();
+        if (dur > 0) {
+          let times = dur*1000;
+          this.timer = setTimeout(()=> { 
+            if(this.playing){
+              this.playing = false;
+            }
+          },times);
+          clearInterval(timerDur);
+        }
+    }, 100);
+        
+      });
   }
 
   stop(){
     this.audioCtrl.stopAudio();
+    clearTimeout(this.timer);
     this.playing = false;
   }
 
@@ -159,6 +179,11 @@ export class RepereInfoPage {
   private toggleStreetView() {
     this.navCtrl.push(StreetviewPage,
       {latlng : {lat : this.latitude, lng : this.longitude}});
+  }
+
+  private loadTwitter(){
+    var monframe = "http://mobile.twitter.com/search?f=tweets&q=geocode:"+this.latitude+","+this.longitude+",30km" ;
+        const browser = this.iab.create(monframe,'_blank','location=no');
   }
 
   private ajouterMarker(latlng:LatLng){
