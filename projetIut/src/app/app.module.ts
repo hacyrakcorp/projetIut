@@ -38,6 +38,7 @@ import { GlobalServiceProvider } from '../providers/global-service/global-servic
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Insomnia } from '@ionic-native/insomnia';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     Camera, CameraPreview, Base64ToGallery,AndroidPermissions,Photo,PrisePhoto,
     Audio,Media,File,
     GPS,GoogleMaps,Geolocation,
-    Insomnia
+    Insomnia, InAppBrowser
   ]
 })
 export class AppModule {

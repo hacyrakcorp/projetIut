@@ -11,6 +11,8 @@ import { MediaObject } from '@ionic-native/media';
 //Test param car console.log ne fonctionne pas
 //import { AlertController } from 'ionic-angular';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 @Component({
   selector: 'page-repere-info',
   templateUrl: 'repere-info.html',
@@ -39,7 +41,8 @@ export class RepereInfoPage {
     public    platform : Platform,
     private   audioCtrl : Audio,
     private   sqliteCtrl : SQLitePage,
-    private   googleMaps  : GoogleMaps
+    private   googleMaps  : GoogleMaps,
+    private   iab : InAppBrowser
     ) {
       let rep = navParams.get('repere');
       this.id = rep.id;
@@ -176,6 +179,15 @@ export class RepereInfoPage {
   private toggleStreetView() {
     this.navCtrl.push(StreetviewPage,
       {latlng : {lat : this.latitude, lng : this.longitude}});
+  }
+
+  private loadTwitter(){
+    var monframe = "http://mobile.twitter.com/search?f=tweets&q=geocode:"+this.latitude+","+this.longitude+",30km" ;
+        const browser = this.iab.create(monframe,'_blank','location=no');
+  }
+  private loadWiki(){
+    var monframe = "https://fr.m.wikipedia.org/wiki/Spécial:Nearby#/coord/"+this.latitude+","+this.longitude;
+        const browser = this.iab.create(monframe,'_blank','location=no');
   }
 
   private ajouterMarker(latlng:LatLng){
