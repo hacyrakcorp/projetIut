@@ -11,6 +11,8 @@ import { Photo } from './takephoto';
 import { Audio } from './priseaudio';
 import { GPS } from './gps';
 
+import { Media, MediaObject } from '@ionic-native/media';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -26,6 +28,7 @@ export class HomePage {
   longitude;
   filePath;
   chrono;
+  audio:MediaObject;
   constructor(
     public navCtrl: NavController,
     public platform : Platform,
@@ -35,6 +38,7 @@ export class HomePage {
     private audioCtrl : Audio,
     private sqliteCtrl : SQLitePage,
     private GPSCtrl : GPS,
+    private mediaCtrl : Media
     //private paramCtrl : ParametrePage
     ) { 
       this.sqliteCtrl.getOptions()
@@ -72,7 +76,6 @@ export class HomePage {
     //var filePath;
     
     if (!this.clickstate){
-      alert('oneclick');
       if(this.opt_audio){
         this.isenabled=true;
       } else {
@@ -114,6 +117,8 @@ export class HomePage {
             this.filePath = this.audioCtrl.startRecord();
             let TIME_IN_MS = 30000;
             this.chrono = setTimeout(() => {
+              //Son de fin
+              this.playSound();
               //Enregistrement bdd
               let array = [this.repereName,
                 this.latitude,
@@ -139,12 +144,18 @@ export class HomePage {
               this.photoCtrl.photoshoot(
 
               ).then((base64) => {
+                //Son de fin
+              this.playSound();
+              //Enregistrement bdd
                 let array = [this.repereName,this.latitude,this.longitude,'',base64];
                 this.sqliteCtrl.insert(TABLE_REPERES,array); 
                 this.isenabled = true;
                 repereOK.present();
               }).catch(err=>this.isenabled = true);
             } else {
+              //Son de fin
+              this.playSound();
+              //Enregistrement bdd
               let array = [this.repereName,this.latitude,this.longitude,'',''];
               this.sqliteCtrl.insert(TABLE_REPERES,array);
               this.isenabled = true;
@@ -165,9 +176,10 @@ export class HomePage {
     });
 
     } else {
-      alert('second click');
       this.audioCtrl.stopRecord();
       this.clickstate = false;
+      //Son de fin
+      this.playSound();
       //Enregistrement bdd
       let array = [this.repereName,this.latitude,this.longitude,this.filePath,this.photographie];
       this.sqliteCtrl.insert(TABLE_REPERES,array);
@@ -189,6 +201,17 @@ export class HomePage {
     if (sec.length == 1) { sec = "0"+sec;}
     var dateHeure = annee+mois+jour+"_"+heure+min+sec;
     return dateHeure;
+  }
+
+  playSound(){
+    if (this.platform.is('ios')) {
+      this.audio = this.mediaCtrl.create("http://s1download-universal-soundbank.com/mp3/sounds/12471.mp3");
+    }
+    else if (this.platform.is('android')) {
+      this.audio = this.mediaCtrl.create("http://s1download-universal-soundbank.com/mp3/sounds/12471.mp3");
+    }
+    this.audio.play();
+    this.audio.setVolume(0.8);
   }
 
   //Test bdd
